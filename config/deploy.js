@@ -38,7 +38,7 @@ module.exports = function(deployTarget) {
   }
 
   if (deployTarget === 'prod') {
-    ENV.redis.url = " redis://h:pf8bv4r55ks14l6tn999fbire6n@ec2-174-129-243-209.compute-1.amazonaws.com:30179"; // process.env.PROD_REDIS_URL;
+    ENV.redis.url = "redis://h:pf8bv4r55ks14l6tn999fbire6n@ec2-174-129-243-209.compute-1.amazonaws.com:30179"; // process.env.PROD_REDIS_URL;
   }
 
   return ENV;
