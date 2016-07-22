@@ -1,0 +1,7 @@
+<ul>
+  {{#each model as |course|}}
+    <li>{{course.id}}: {{course.name}}</li>
+  {{else}}
+    <p>No courses</p>
+  {{/each}}
+</ul>
