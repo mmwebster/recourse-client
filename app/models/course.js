@@ -15,7 +15,7 @@ export default Model.extend({
   school: belongsTo('school'),
   timelines: hasMany('timeline'),
   // concurrent_course: hasMany('concurrent_course')
-  // quarters: hasMany('quarter'),
+  quarters: hasMany('quarter'),
 
   cid: Ember.computed('subject', 'number', function() {
     return this.get('subject') + this.get('number');
