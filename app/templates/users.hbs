@@ -1,0 +1,8 @@
+<h3>(Users Template)</h3>
+<ul>
+  {{#each model as |user|}}
+    <li>{{user.id}}</li>
+  {{else}}
+    <p>No users</p>
+  {{/each}}
+</ul>

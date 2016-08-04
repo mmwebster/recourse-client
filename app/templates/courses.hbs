@@ -1,7 +1,21 @@
-<h2>(Courses Template)</h2>
+<h3>(Courses Template)</h3>
 <ul>
   {{#each model as |course|}}
-    <li>{{course.id}}: {{course.name}}</li>
+    <li>
+    {{course.id}}:
+      <ul>
+        <li><b>Title:</b> {{course.title}}</li>
+        <li><b>Subject:</b> {{course.subject}}</li>
+        <li><b>Number:</b> {{course.number}}</li>
+        <li><b>Units:</b> {{course.units}}</li>
+        <li><b>Season Fall:</b> {{course.season_fall}}</li>
+        <li><b>Season Winter:</b> {{course.season_winter}}</li>
+        <li><b>Season Spring:</b> {{course.season_spring}}</li>
+        <li><b>Total Units:</b> {{course.total_units}}</li>
+        <li><b>Created At:</b> {{course.created_at}}</li>
+        <li><b>CID:</b>{{course.cid}}</li>
+      </ul>
+    </li>
   {{else}}
     <p>No courses</p>
   {{/each}}
