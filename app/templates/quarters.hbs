@@ -1,7 +1,7 @@
 <h3>(Quarters Template)</h3>
 <ul>
   {{#each model as |quarter|}}
-    <li>{{quarter.id}}</li>
+  <li>{{quarter.id}}: {{quarter.season}} : {{quarter.start_date}}</li>
   {{else}}
     <p>No quarters</p>
   {{/each}}

@@ -1,7 +1,28 @@
 <h3>(Quarters Schools)</h3>
 <ul>
   {{#each model as |school|}}
-    <li>{{school.id}}</li>
+    <li>{{school.id}}: {{school.title}}
+      <ul><b>Courses:</b>
+        {{#each school.courses as |course|}}
+          <li>{{course.id}}: {{course.title}}</li>
+        {{else}}
+          <p>No courses</p>
+        {{/each}}
+      </ul>
+      <ul><b>Users:</b> {{#each school.users as |user|}}
+          <li>{{user.id}}: {{user.full_name}}</li>
+        {{else}}
+          <p>No users</p>
+        {{/each}}
+      </ul>
+      <ul><b>Nodes:</b> 
+        {{#each school.nodes as |node|}}
+          <li>{{node.id}}: {{node.title}}</li>
+        {{else}}
+          <p>No nodes</p>
+        {{/each}}
+      </ul>
+    </li>
   {{else}}
     <p>No schools</p>
   {{/each}}

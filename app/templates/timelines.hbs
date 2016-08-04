@@ -1,7 +1,22 @@
 <h3>(Timelines Template)</h3>
 <ul>
   {{#each model as |timeline|}}
-    <li>{{timeline.id}}</li>
+  <li>{{timeline.id}}: {{timeline.title}}
+    <ul><b>Quarters:</b>
+      {{#each timeline.quarters as |quarter|}}
+        <li>{{quarter.id}} : {{quarter.season}} : {{quarter.start_date}}</li>
+      {{else}}
+        <p>No quarters</p>
+      {{/each}}
+    </ul>
+    <ul><b>Courses:</b>
+      {{#each timeline.courses as |course|}}
+        <li>{{course.id}}: {{course.title}}</li>
+      {{else}}
+        <p>No courses</p>
+      {{/each}}
+    </ul>
+  </li>
   {{else}}
     <p>No timelines</p>
   {{/each}}

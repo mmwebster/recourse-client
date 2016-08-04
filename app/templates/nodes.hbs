@@ -1,7 +1,14 @@
 <h3>(Nodes Template)</h3>
 <ul>
   {{#each model as |node|}}
-    <li>{{node.id}}</li>
+  <li>{{node.id}}: {{node.title}}
+    <ul>
+      <li><b>School:</b> {{node.school.id}} : {{node.school.title}}</li>
+      {{#if node.course}}
+      <li><b>Course:</b> {{node.course.id}} : {{node.course.title}}</li>
+      {{/if}}
+    </ul>
+  </li>
   {{else}}
     <p>No nodes</p>
   {{/each}}
