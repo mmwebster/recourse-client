@@ -1,7 +1,20 @@
 <h3>(Quarters Template)</h3>
 <ul>
   {{#each model as |quarter|}}
-  <li>{{quarter.id}}: {{quarter.season}} : {{quarter.start_date}}</li>
+  <li>{{quarter.id}}: {{quarter.season}} : {{quarter.start_date}}
+    <ul>
+      <li><b>Timeline:</b> {{quarter.timeline.id}} : {{quarter.timeline.title}}</li>
+      <li><b>Courses:</b>
+        <ul>
+          {{#each quarter.courses as |course|}}
+            <li>{{course.id}}: {{course.title}}</li>
+          {{else}}
+            <p>No courses</p>
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+  </li>
   {{else}}
     <p>No quarters</p>
   {{/each}}

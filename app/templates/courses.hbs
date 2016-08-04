@@ -22,12 +22,12 @@
             {{/each}}
           </ul>
         </li>
-        <li><b>Concurrent Courses:</b>
+        <li><b>Concurrent Children:</b>
           <ul>
-            {{#each course.concurrent_courses as |course|}}
-              <li>{{course.id}}: {{course.title}}</li>
+            {{#each course.concurrent_children as |concurrent_course|}}
+              <li>{{concurrent_course.id}}: {{concurrent_course.title}}</li>
             {{else}}
-              <li> No concurrent courses</li>
+              <li> No concurrent children</li>
             {{/each}}
           </ul>
         </li>
