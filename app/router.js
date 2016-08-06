@@ -12,6 +12,8 @@ Router.map(function() {
   this.route('nodes');
   this.route('quarters');
   this.route('timelines');
+  this.route('login');
+  this.route('dashboard');
 });
 
 export default Router;

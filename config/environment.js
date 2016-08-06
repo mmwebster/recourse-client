@@ -6,6 +6,12 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+
+    // maybe need to install ember-cli-contents-security-policy
+    contentSecurityPolicy: {
+      'connect-src': "*"
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -18,6 +24,12 @@ module.exports = function(environment) {
       // when it is created
     }
   };
+
+  // Regardless of environment
+  ENV['ember-simple-auth'] = {
+    routeAfterAuthentication: 'dashboard',
+    routeIfAlreadyAuthenticated: 'dashboard'
+  }
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
