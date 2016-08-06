@@ -6,14 +6,19 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('courses');
-  this.route('schools');
-  this.route('users');
-  this.route('nodes');
-  this.route('quarters');
-  this.route('timelines');
+  // permament routes
   this.route('login');
   this.route('dashboard');
+  this.route('users');
+
+  // temporary debugging routes
+  this.route('models', function() {
+    this.route('courses');
+    this.route('schools');
+    this.route('nodes');
+    this.route('quarters');
+    this.route('timelines');
+  });
 });
 
 export default Router;
