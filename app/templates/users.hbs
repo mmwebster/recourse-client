@@ -1,18 +1,19 @@
 <h3>(Users Template)</h3>
-<ul>
-  {{#each model as |user|}}
-  <li>{{user.id}}: {{user.full_name}}
-    <li><b>School:</b> {{user.school.id}} : {{user.school.title}}</li>
-    <ul><b>Timelines:</b>
-      {{#each user.timelines as |timeline|}}
-        <li>{{timeline.id}} : {{timeline.title}}</li>
-      {{else}}
-        <p>No timelines</p>
-      {{/each}}
-      <li></li>
-    </ul>
-  </li>
-  {{else}}
-    <p>No users</p>
-  {{/each}}
-</ul>
+{{outlet}}
+<!-- <ul> -->
+<!--   {{#each model as |user|}} -->
+<!--   <li>{{user.id}}: {{user.full_name}} -->
+<!--     <li><b>School:</b> {{user.school.id}} : {{user.school.title}}</li> -->
+<!--     <ul><b>Timelines:</b> -->
+<!--       {{#each user.timelines as |timeline|}} -->
+<!--         <li>{{timeline.id}} : {{timeline.title}}</li> -->
+<!--       {{else}} -->
+<!--         <p>No timelines</p> -->
+<!--       {{/each}} -->
+<!--       <li></li> -->
+<!--     </ul> -->
+<!--   </li> -->
+<!--   {{else}} -->
+<!--     <p>No users</p> -->
+<!--   {{/each}} -->
+<!-- </ul> -->

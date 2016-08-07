@@ -10,7 +10,9 @@ Router.map(function() {
   this.route('login');
   this.route('sign-up');
   this.route('dashboard');
-  this.route('users');
+  this.route('users', function() {
+    this.route('confirmation');
+  });
 
   // temporary debugging routes
   this.route('models', function() {
