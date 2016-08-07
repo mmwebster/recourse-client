@@ -1,12 +1,18 @@
 <form {{action "authenticate" on="submit"}}>
-  <label for="identification">Login</label>
+  <label for="identification">Email</label>
+  <br />
   {{input value=identification placeholder="Enter Login"}}
-
+  <br />
   <label for="password">Password</label>
+  <br />
   {{input value=password type="password" placeholder="Enter Password"}}
-
+  <br />
   <button type="submit">Login</button>
 </form>
+
+<p>{{#link-to 'sign-up'}}Sign Up{{/link-to}}</p>
+<p><a href="#">!Forgot your password!</a></p>
+<p><a href="#">!Didn't receive confirmation instructions?!</a></p>
 
 {{#if errorMessage}}
   {{errorMessage}}

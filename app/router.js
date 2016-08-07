@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   // permament routes
   this.route('login');
+  this.route('sign-up');
   this.route('dashboard');
   this.route('users');
 
@@ -19,6 +20,9 @@ Router.map(function() {
     this.route('quarters');
     this.route('timelines');
   });
+
+  // catchall route for 404
+  this.route('page-not-found', { path: '/*wildcard' });
 });
 
 export default Router;

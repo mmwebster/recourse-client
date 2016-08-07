@@ -1,0 +1,18 @@
+<form {{action "submit" on="submit"}}>
+  <label for="nameFirst">First Name</label>
+  {{input value=user.nameFirst placeholder="Enter first name"}}
+  <label for="nameLast">Last Name</label>
+  {{input value=user.nameLast placeholder="Enter last name"}}
+  <label for="email">Email</label>
+  {{input value=user.email placeholder="Enter email"}}
+  <label for="password">Password <em>(6 characters minimum)</em></label>
+  {{input value=user.password type="password" placeholder="Enter password"}}
+  <label for="passwordConfirmation">Password Confirmation</label>
+  {{input value=user.passwordConfirmation type="password" placeholder="Enter password again"}}
+  <button type="submit">Sign Up</button>
+</form>
+{{#if errorMessage}}
+  {{errorMessage}}
+{{/if}}
+<p>{{#link-to 'login'}}Login{{/link-to}}</p>
+<p><a href="#">!Didn't receive confirmation instructions?!</a></p>
