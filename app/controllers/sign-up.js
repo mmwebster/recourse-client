@@ -16,15 +16,6 @@ export default Ember.Controller.extend({
         alert("You must confirm your email account before you'll be able to login.");
         _this.set('displaySignupForm', false);
       });
-      // this.transitionToRoute('login')
-      // .then((user) => {
-      //   this.get('session')
-      //   .authenticate('authenticator:devise',
-      //     user.get('email'), user.get('password'))
-      //   .catch((reason) => {
-      //     this.set('errorMessage', reason.error || reason);
-      //   });
-      // });
     }
   }
 });
