@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
 
   confirmAccount: Ember.observer('confirmation_token', 'model', function() {
     var token = this.get('confirmation_token');
-    var _this = this
+    var _this = this;
 
     if (token !== "") {
       // Confirm the account
@@ -15,8 +15,8 @@ export default Ember.Controller.extend({
         console.log("ERROR: " + err);
       }).then(function() {
         // Then transition to the login route
-        alert("Your account has successfully been actived.")
-        _this.transitionToRoute('login');
+        alert("Your account has successfully been actived.");
+        _this.transitionToRoute('users.login');
       });
     }
   })

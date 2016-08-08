@@ -1,5 +1,4 @@
 import Ember from 'ember';
-const { service } = Ember.inject;
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
@@ -8,7 +7,7 @@ export default Ember.Controller.extend({
   actions: {
     signUp(user) {
       let newUser = user;
-      var _this = this
+      var _this = this;
       newUser.save().catch((error) => {
         alert("Error: " + error);
         this.set('errorMessage', error);

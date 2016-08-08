@@ -1,0 +1,8 @@
+<h3>Sign Up</h3>
+{{#if displaySignupForm}}
+  {{sign-up-form user=model triggerSignUp=(action "signUp") errorMessage=errorMessage}}
+{{else}}
+  <h4>You must now confirm you email address in order to activate your account.</h4>
+  <h4>Already confirmed? {{#link-to 'users.login'}}Click here to login.{{/link-to}}</h4>
+{{/if}}
+{{outlet}}

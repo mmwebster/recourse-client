@@ -6,14 +6,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  // permament routes
-  this.route('login');
-  this.route('sign-up');
-  this.route('dashboard');
-  this.route('users', function() {
-    this.route('confirmation');
+  // ***********************
+  // Authenticated Routes
+  // ***********************
+  this.route('user', function() {
+    this.route('dashboard');
   });
-
   // temporary debugging routes
   this.route('models', function() {
     this.route('courses');
@@ -23,6 +21,18 @@ Router.map(function() {
     this.route('timelines');
   });
 
+  // ***********************
+  // Unauthenticated Routes
+  // ***********************
+  this.route('users', function() {
+    this.route('sign-up');
+    this.route('confirmation');
+    this.route('login');
+  });
+
+  // ***********************
+  // Standard Routes
+  // ***********************
   // catchall route for 404
   this.route('page-not-found', { path: '/*wildcard' });
 });

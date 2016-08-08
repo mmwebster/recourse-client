@@ -25,11 +25,12 @@ module.exports = function(environment) {
     }
   };
 
-  // Regardless of environment
+  // For every environment
   ENV['ember-simple-auth'] = {
-    routeAfterAuthentication: 'dashboard',
-    routeIfAlreadyAuthenticated: 'dashboard'
-  }
+    authenticationRoute: 'users.login',
+    routeAfterAuthentication: 'user.dashboard',
+    routeIfAlreadyAuthenticated: 'user.dashboard'
+  };
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
