@@ -11,6 +11,12 @@ Router.map(function() {
   // ***********************
   this.route('user', function() {
     this.route('dashboard');
+    this.route('settings');
+    this.route('onboard', function() {
+      this.route('school');
+      this.route('degree-path');
+      this.route('prior-coursework');
+    });
   });
   // temporary debugging routes
   this.route('models', function() {
