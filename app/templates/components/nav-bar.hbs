@@ -1,5 +1,8 @@
-{{#link-to 'index'}}Index{{/link-to}} | {{#link-to 'user.dashboard'}}Dashboard{{/link-to}} |
-{{#link-to 'models'}}Models{{/link-to}} | {{#link-to 'user.onboard.school'}}Onboarding{{/link-to}} | {{account-info}}
-
+{{#if session.isAuthenticated}}
+  {{#link-to 'user.dashboard'}}Dashboard{{/link-to}} | {{#link-to 'models'}}Models{{/link-to}} | {{#link-to 'user.onboard.school'}}Onboarding{{/link-to}} ||
+  Hi, <strong>{{account.nameFirst}}</strong> | {{#link-to 'user.settings'}}Settings{{/link-to}}
+{{else}}
+  {{#link-to 'index'}}Index{{/link-to}}
+{{/if}}
 <hr />
 {{yield}}

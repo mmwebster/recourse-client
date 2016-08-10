@@ -1,6 +1,0 @@
-<strong>account-info</strong>
-{{#if session.isAuthenticated}}
-  Welcome, {{user.email}} | {{#link-to 'user.settings'}}Settings{{/link-to}}
-{{else}}
-  {{#link-to 'users.login'}}Login (if !auth'd){{/link-to}} | {{#link-to 'users.sign-up'}}Sign Up (if !auth'd){{/link-to}}
-{{/if}}

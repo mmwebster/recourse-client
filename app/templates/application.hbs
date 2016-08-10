@@ -1,4 +1,5 @@
-{{nav-bar}}
+{{nav-bar session=session account=sessionAccount.account}}
+
 Hi, {{sessionAccount.account.nameFirst}} {{sessionAccount.account.nameLast}}!
 Bool, {{#if session.isAuthenticated}}true{{else}}false{{/if}}
 
