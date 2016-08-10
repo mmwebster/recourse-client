@@ -8,7 +8,9 @@ export default Model.extend({
   // timelines: hasMany('timeline'),
   // nameFirst: attr('string'),
   // nameLast: attr('string'),
+  // id: attr('number'),
+  signInCount: attr('number'),
   password: attr('string'),
-  // passwordConfirmation: attr('string'),
+  passwordConfirmation: attr('string'),
   email: attr('string')
 });

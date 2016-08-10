@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   actions: {
     submit: function() {
       let user = this.get('user');
+      user.set('signInCount', 0);
       this.attrs.triggerSignUp(user);
     }
   }
