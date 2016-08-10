@@ -1,2 +1,16 @@
-<h3>Your account has been confirmed, redirecting you to the login page..</h3>
+{{#if confirmed}}
+  <h3>Your account has been confirmed!</h3>
+  {{#link-to 'users.login'}}Go login{{/link-to}}
+{{else if confirming}}
+  <h3>Confirming your account..</h3>
+{{else}}
+  <h3>Please click on the link emailed to you in order to activate your account.</h3>
+  <button>!Resend confirmation email!</button>
+{{/if}}
+
+{{#if errorMessage}}
+  <hr />
+  {{errorMessage}}
+  <hr />
+{{/if}}
 {{outlet}}
