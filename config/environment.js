@@ -28,8 +28,8 @@ module.exports = function(environment) {
   // For every environment
   ENV['ember-simple-auth'] = {
     authenticationRoute: 'users.login',
-    routeAfterAuthentication: 'user',//.dashboard',
-    routeIfAlreadyAuthenticated: 'user'//.dashboard'
+    routeAfterAuthentication: 'user.dashboard',
+    routeIfAlreadyAuthenticated: 'user.dashboard'
   };
 
   if (environment === 'development') {
