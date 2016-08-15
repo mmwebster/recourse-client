@@ -13,7 +13,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   sessionAuthenticated() {
     var _this = this;
     this._loadCurrentUser().then(() => {
-      if (_this.get('session.data.authenticated.sign_in_count') == 1) {
+      if (_this.get('session.data.authenticated.sign_in_count') === 1) {
         _this.transitionTo('user.onboard.school');
       } else {
         _this.transitionTo('user.dashboard');

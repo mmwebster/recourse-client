@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   ajax: Ember.inject.service(),
   confirming: Ember.computed('confirmation_token', 'confirmed', function() {
     if(!Ember.isEmpty(this.get('confirmation_token')) && this.get('confirmed') === null) {
-      return true
+      return true;
     } else {
       return false;
     }

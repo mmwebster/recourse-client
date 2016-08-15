@@ -2,15 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
-  user: Ember.computed('model', function() {
-    return this.get('model');
-  }),
   displaySignupForm: true,
 
   actions: {
-    submit(user) {
+    submit: function() {
       var _this = this;
-      let newUser = this.get('user');
+      let newUser = this.get('model');
       newUser.set('signInCount', 0);
 
       newUser.save().then(function() {

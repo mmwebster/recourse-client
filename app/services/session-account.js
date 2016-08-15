@@ -9,7 +9,7 @@ export default Service.extend({
   loadCurrentUser() {
     return new RSVP.Promise((resolve, reject) => {
       const id = this.get('session.data.authenticated.id');
-      if (!Ember.isEmpty(id)) {
+      if (!isEmpty(id)) {
         return this.get('store').find('user', id).then((user) => {
           this.set('account', user);
           console.log("uid is " + user.get('id'));
