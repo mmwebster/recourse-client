@@ -1,5 +1,31 @@
-<p>Degree path listings:</p>
-{{degree-major-item}}
-{{degree-minor-item}}
-{{#link-to 'user.onboard.prior-coursework'}}Onboard, prior coursework{{/link-to}}
-{{outlet}}
+<div class="degree-path-view">
+
+  <div class="layout-column">
+    <h3>Select your major(s) and minor(s)</h3>
+  </div>
+
+  <div id="form" class="layout-column form">
+
+    {{#paper-form onSubmit='submit' as |form|}}
+
+
+      {{! List selected majors (and delete buttons)}}
+
+      {{! Select new major}}
+
+      {{! List selected minors (and delete buttons)}}
+
+      {{! Select new minor}}
+
+
+      {{degree-major-item}}
+      {{degree-minor-item}}
+      {{#link-to 'user.onboard.prior-coursework'}}Onboard, prior coursework{{/link-to}}
+      {{outlet}}
+
+
+    {{/paper-form}}
+  </div>
+
+</div>
+
