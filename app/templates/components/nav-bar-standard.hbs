@@ -1,0 +1,16 @@
+<div class="standard-nav-bar-component layout-row">
+  {{#link-to 'index' class="logo layout-row"}}
+    <h1>Reqourse</h1>
+    <h6>BETA</h6>
+  {{/link-to}}
+  <div class="links layout-row">
+    {{#link-to 'index'}}{{#paper-button}}Home{{/paper-button}}{{/link-to}}
+    {{#if session.isAuthenticated}}
+      {{#paper-button onClick=(action 'logout')}}Logout{{/paper-button}}
+      {{#link-to 'user.dashboard'}}{{#paper-button primary=true}}Dashboard{{/paper-button}}{{/link-to}}
+    {{else}}
+      {{#link-to 'users.login'}}{{#paper-button}}Login{{/paper-button}}{{/link-to}}
+      {{#link-to 'users.sign-up'}}{{#paper-button primary=true}}Sign Up{{/paper-button}}{{/link-to}}
+    {{/if}}
+  </div>
+</div>

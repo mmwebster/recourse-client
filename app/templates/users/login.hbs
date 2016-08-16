@@ -1,22 +1,78 @@
-<h3>Login</h3>
-<form {{action "authenticate" on="submit"}}>
-  <label for="identification">Email</label>
-  <br />
-  {{input value=identification placeholder="Enter Login"}}
-  <br />
-  <label for="password">Password</label>
-  <br />
-  {{input value=password type="password" placeholder="Enter Password"}}
-  <br />
-  <button type="submit">Login</button>
-</form>
+<div class="login-view layout-column">
+  <div class="layout-column">
+    <h3>Login</h3>
+  </div>
 
-<p>{{#link-to 'users.sign-up'}}Sign Up{{/link-to}}</p>
-<p><a href="#">!Forgot your password!</a></p>
-<p><a href="#">!Didn't receive confirmation instructions?!</a></p>
+  <div id="form" class="layout-column form">
+    {{#paper-form onSubmit='submit' as |form|}}
 
-{{#if errorMessage}}
-  {{errorMessage}}
-{{/if}}
+      {{form.input
+        label="E-mail"
+        type="email"
+        icon="email"
+        customValidations=validations.email
+        value=email
+        onChange=(action (mut email))
+      }}
 
-{{outlet}}
+      {{form.input
+        label="Password"
+        flex=34
+        type="password"
+        icon="security"
+        customValidations=validations.password
+        value=password
+        onChange=(action (mut password))
+      }}
+
+      {{#paper-button disabled=form.isInvalid onClick=(action form.onSubmit)}}
+        <div class="layout-row">
+          <div class="">
+            Submit
+          </div>
+          <div class="">
+            {{! Loading spinner}}
+            {{#if isRequesting}}
+              {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+            {{/if}}
+          </div>
+        </div>
+      {{/paper-button}}
+
+    {{/paper-form}}
+  </div>
+
+  {{#if showErrorDialog}}
+    {{#paper-dialog onClose=(action "closeErrorDialog" "cancel") parent="#form" origin=dialogOrigin clickOutsideToClose=true}}
+      <form>
+        {{#paper-toolbar}}
+          <div class="md-toolbar-tools">
+            <h2>There was a problem logging in</h2>
+            <span class="flex"></span>
+            {{#paper-button iconButton=true onClick=(action "closeErrorDialog" "cancel")}}{{paper-icon icon="close"}}{{/paper-button}}
+          </div>
+        {{/paper-toolbar}}
+
+        {{#paper-dialog-content}}
+          <div style="max-width:800px;max-height:810px;">
+            <p>
+              {{errorMessage}}
+            </p>
+          </div>
+        {{/paper-dialog-content}}
+
+        {{#paper-dialog-actions class="layout-row"}}
+          <span class="flex"></span>
+          {{#paper-button onClick=(action "closeErrorDialog" "cancel")}}Cancel{{/paper-button}}
+          {{#paper-button onClick=(action "closeErrorDialog" "ok")}}OK{{/paper-button}}
+        {{/paper-dialog-actions}}
+      </form>
+    {{/paper-dialog}}
+  {{/if}}
+
+  <div class="layout-column links">
+    <div>{{#link-to 'users.sign-up'}}Sign Up{{/link-to}}</div>
+    <div><a href="#">!Forgot your password!</a></div>
+    <div><a href="#">!Didn't receive confirmation instructions?!</a></div>
+  </div>
+</div>

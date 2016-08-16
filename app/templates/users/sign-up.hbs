@@ -1,29 +1,114 @@
-{{#with model as |user|}}
-  <h3>Sign Up</h3>
-  {{#if displaySignupForm}}
-    <form {{action "submit" on="submit"}}>
-      <label for="nameFirst">First Name</label>
-      {{input value=user.nameFirst placeholder="Enter first name"}}
-      <label for="nameLast">Last Name</label>
-      {{input value=user.nameLast placeholder="Enter last name"}}
-      <label for="email">Email</label>
-      {{input value=user.email placeholder="Enter email"}}
-      <label for="password">Password <em>(6 characters minimum)</em></label>
-      {{input value=user.password type="password" placeholder="Enter password"}}
-      <label for="passwordConfirmation">Password Confirmation</label>
-      {{input value=user.passwordConfirmation type="password" placeholder="Enter password again"}}
-      <button type="submit">Sign Up</button>
-    </form>
-    {{#if errormessage}}
-      <hr />
-      {{errormessage}}
-      <hr />
-    {{/if}}
-    <p>{{#link-to 'users.login'}}Login{{/link-to}}</p>
-    <p><a href="#">!Didn't receive confirmation instructions?!</a></p>
-  {{else}}
-    <h4>You must now confirm you email address in order to activate your account.</h4>
-    <h4>Already confirmed? {{#link-to 'users.login'}}Click here to login.{{/link-to}}</h4>
+<div class="sign-up-view layout-column">
+  <div class="layout-column">
+    <h3>Sign Up</h3>
+  </div>
+
+  <div id="form" class="layout-column form">
+    {{#paper-form onSubmit='submit' as |form|}}
+
+      {{form.input
+        label="First Name"
+        type="name"
+        icon="person"
+        customValidations=validations.name
+        value=model.nameFirst
+        onChange=(action (mut model.nameFirst))
+      }}
+
+      {{form.input
+        label="Last Name"
+        type="name"
+        icon="person"
+        customValidations=validations.name
+        value=model.nameLast
+        onChange=(action (mut model.nameLast))
+      }}
+
+      {{form.input
+        label="E-mail"
+        type="email"
+        icon="email"
+        customValidations=validations.email
+        value=model.email
+        onChange=(action (mut model.email))
+      }}
+
+      {{form.input
+        label="Password"
+        flex=34
+        type="password"
+        icon="security"
+        customValidations=validations.password
+        value=model.password
+        onChange=(action (mut model.password))
+      }}
+
+      {{form.input
+        label="Password Confirmation"
+        flex=34
+        type="password"
+        icon="security"
+        customValidations=validations.password
+        value=model.passwordConfirmation
+        onChange=(action (mut model.passwordConfirmation))
+      }}
+
+      {{#paper-button disabled=form.isInvalid onClick=(action form.onSubmit)}}
+        <div class="layout-row">
+          <div class="">
+            Submit
+          </div>
+          <div class="">
+            {{! Loading spinner}}
+            {{#if isRequesting}}
+              {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+            {{/if}}
+          </div>
+        </div>
+      {{/paper-button}}
+
+    {{/paper-form}}
+  </div>
+
+  {{#if showErrorDialog}}
+    {{#paper-dialog onClose=(action "closeErrorDialog" "cancel") parent="#form" origin=dialogOrigin clickOutsideToClose=true}}
+      <form>
+        {{#paper-toolbar}}
+          <div class="md-toolbar-tools">
+            <h2>There was a problem logging in</h2>
+            <span class="flex"></span>
+            {{#paper-button iconButton=true onClick=(action "closeErrorDialog" "cancel")}}{{paper-icon icon="close"}}{{/paper-button}}
+          </div>
+        {{/paper-toolbar}}
+
+        {{#paper-dialog-content}}
+          <div style="max-width:800px;max-height:810px;">
+            <p>
+              {{errorMessage}}
+            </p>
+          </div>
+        {{/paper-dialog-content}}
+
+        {{#paper-dialog-actions class="layout-row"}}
+          <span class="flex"></span>
+          {{#paper-button onClick=(action "closeErrorDialog" "cancel")}}Cancel{{/paper-button}}
+          {{#paper-button onClick=(action "closeErrorDialog" "ok")}}OK{{/paper-button}}
+        {{/paper-dialog-actions}}
+      </form>
+    {{/paper-dialog}}
   {{/if}}
-  {{outlet}}
-{{/with}}
+
+  <div class="layout-column links">
+    <div>{{#link-to 'users.login'}}Login{{/link-to}}</div>
+    <div><a href="#">!Didn't receive confirmation instructions?!</a></div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

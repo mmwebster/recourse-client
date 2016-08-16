@@ -1,2 +1,25 @@
-<h2>Welcome to Reqourse</h2>
-<p>This is where we'll have bright and shiny login/sign-up links and talk a bit about why Reqourse is awesome.</p>
+{{nav-bar-standard session=session account=sessionAccount.account}}
+<div class="index-view layout-column">
+  <div class="header layout-column">
+    <div class="title">
+      <h2>Welcome to Reqourse</h2><h6>BETA</h6>
+    </div>
+
+    <div class="auth-buttons layout-row">
+      {{#link-to 'users.sign-up'}}{{#paper-button raised=true primary=true}}Sign Up{{/paper-button}}{{/link-to}}
+      {{#link-to 'users.login'}}{{#paper-button raised=true}}Login{{/paper-button}}{{/link-to}}
+    </div>
+
+    <div class="text">
+      <p>This is where we'll have bright and shiny login/sign-up links and talk a bit about why Reqourse is awesome.</p>
+    </div>
+  </div>
+
+  <div class="slide layout-column">
+    A slide
+  </div>
+
+  <div class="slide layout-column">
+    Another slide
+  </div>
+</div>
