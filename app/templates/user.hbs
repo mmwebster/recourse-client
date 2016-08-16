@@ -37,23 +37,28 @@
             {{/paper-button}}
           {{/paper-sidenav-toggle}}
 
-          <h2 class="uppercase"><span class="rq-yellow">Reqourse</span> > {{pathName}}</h2>
+          <h2 class="uppercase">
+            <span class="rq-yellow">Reqourse</span>
+            {{#each path as |pathPart|}}
+              > {{pathPart}}
+            {{/each}}
+          </h2>
 
           <span class="flex"></span>
 
           <h5>Hi, <strong class="uppercase">{{sessionAccount.account.nameFirst}}</strong></h5>
 
-          {{#link-to 'user.settings'}}
-            {{#paper-button raised=routeIsSettings disabled=routeIsSettings onClick='changePathToSettings' iconButton=true}}
+          {{#paper-button raised=routeIsSettings disabled=routeIsSettings iconButton=true}}
+            {{#link-to 'user.settings'}}
               {{paper-icon "person"}}
-            {{/paper-button}}
-          {{/link-to}}
+            {{/link-to}}
+          {{/paper-button}}
 
-          {{#link-to 'user.dashboard'}}
-            {{#paper-button raised=routeIsDashboard disabled=routeIsDashboard onClick='changePathToDashboard' iconButton=true}}
+          {{#paper-button raised=routeIsDashboard disabled=routeIsDashboard iconButton=true}}
+            {{#link-to 'user.dashboard'}}
               {{paper-icon "home"}}
-            {{/paper-button}}
-          {{/link-to}}
+            {{/link-to}}
+          {{/paper-button}}
 
         {{/toolbar.tools}}
 

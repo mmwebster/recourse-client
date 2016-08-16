@@ -5,35 +5,24 @@ const { service } = Ember.inject;
 export default Ember.Controller.extend({
   session: service('session'),
   sessionAccount: service('session-account'),
-  // Return the name of the bottom-levelroute to use in toolbar cookie trail in /user
-  actionPathName: null,
-  pathName: Ember.computed('model.transitionPathName', 'actionPathName', function() {
-    if (this.get('actionPathName') === null) {
-      return this.get('model.transitionPathName');
-    } else {
-      return this.get('actionPathName');
+  // Return path parts names after /user for bread crumbs
+  applicationController: Ember.inject.controller("application"),
+  path: Ember.computed('applicationController.currentPath', function() {
+    var path = this.get('applicationController.currentPath').split('.');
+    // remove the first element `user`
+    path.shift();
+    // remove `index` if it exists
+    var index = path.indexOf("index")
+    if (index !== -1) {
+      path.splice(index, 1);
     }
-  }),
-  routeIsDashboard: Ember.computed('pathName', function() {
-    return this.get('pathName') === "dashboard";
-  }),
-  routeIsSettings: Ember.computed('pathName', function() {
-    return this.get('pathName') === "settings";
+    return path;
   }),
 
-  items: [
-    {
-      icon: "person",
-      title: "A person"
-    }
-  ],
-
-  actions: {
-    changePathToDashboard: function() {
-      this.set('actionPathName', 'dashboard');
-    },
-    changePathToSettings: function() {
-      this.set('actionPathName', 'settings');
-    },
-  }
+  routeIsSettings: Ember.computed('path', function() {
+    return (this.get('path')[0] === "settings");
+  }),
+  routeIsDashboard: Ember.computed('path', function() {
+    return (this.get('path')[0] === "dashboard");
+  }),
 });
