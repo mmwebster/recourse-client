@@ -1,0 +1,22 @@
+{{! requires `items`, `type`, and `action...`}}
+{{#paper-content class="md-whiteframe-z1"}}
+  {{#paper-list}}
+    {{#each items as |item|}}
+      {{#paper-item class="md-3-line list-item"}}
+        <div class="md-list-item-text list-item-text">
+          <div class="layout-row layout-align-space-between">
+            <div class="layout-column layout-align-space-around-start">
+              <h4>{{item.title}}</h4>
+            </div>
+            <div>
+              {{#paper-button warn=true iconButton=true onClick=(action 'removeItem' item)}}
+                {{paper-icon "remove circle"}}
+              {{/paper-button}}
+            </div>
+          </div>
+        </div>
+      {{/paper-item}}
+      {{paper-divider}}
+    {{/each}}
+  {{/paper-list}}
+{{/paper-content}}

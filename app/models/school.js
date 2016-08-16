@@ -6,5 +6,7 @@ export default Model.extend({
   title: attr('string'),
   courses: hasMany('course'),
   users: hasMany('user'),
-  nodes: hasMany('node')
+  nodes: hasMany('node'),
+  degreeMajors: hasMany('degreeMajoy'),
+  degreeMinor: hasMany('degreeMinor'),
 });

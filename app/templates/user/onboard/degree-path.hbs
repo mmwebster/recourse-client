@@ -10,10 +10,14 @@
 
 
       {{! List selected majors (and delete buttons)}}
+      {{#paper-subheader class="md-no-sticky"}}Majors{{/paper-subheader}}
+      {{degree-path-list items=school.degreeMajors type='majors'}}
 
       {{! Select new major}}
 
       {{! List selected minors (and delete buttons)}}
+      {{#paper-subheader class="md-no-sticky"}}Minors{{/paper-subheader}}
+      {{degree-path-list items=school.degreeMinors type='minors'}}
 
       {{! Select new minor}}
 

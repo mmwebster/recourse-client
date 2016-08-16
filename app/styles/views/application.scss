@@ -12,6 +12,17 @@ a, a * {
   color: auto;
 }
 
+.list-item.ember-view {
+  min-height: 0px;
+}
+
+.paper-list > .list-item > .md-list-item-inner {
+  min-height: 0px;
+  padding: 10px 15px;
+}
+
+
+
 .uppercase {
   text-transform: capitalize;
 }
