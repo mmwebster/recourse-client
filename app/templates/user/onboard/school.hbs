@@ -1,4 +1,46 @@
-<p>School listings:</p>
-{{school-item}}
-{{#link-to 'user.onboard.degree-path'}}Onboard, degree path{{/link-to}}
-{{outlet}}
+<div class="school-view">
+
+  <div class="layout-column">
+    <h3>Select your school</h3>
+  </div>
+
+  <div id="form" class="layout-column form">
+
+    {{school-item}}
+
+    {{#paper-form onSubmit='submit' as |form|}}
+
+      {{#paper-select
+        placeholder="Select your school"
+        value=selectedSchool
+        onChange=(action (mut selectedSchool))
+      }}
+        {{#with model as |schools|}}
+          {{#each schools as |school|}}
+            {{#paper-option value=school.title}}
+              {{school.title}}
+            {{/paper-option}}
+          {{/each}}
+        {{/with}}
+      {{/paper-select}}
+
+      <div class="layout-row">
+        {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action form.onSubmit)}}
+          <div class="layout-row">
+            <div class="">
+              Continue
+            </div>
+            <div class="">
+              {{! Loading spinner}}
+              {{#if isRequesting}}
+                {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+              {{/if}}
+            </div>
+          </div>
+        {{/paper-button}}
+      </div>
+
+    {{/paper-form}}
+  </div>
+
+</div>
