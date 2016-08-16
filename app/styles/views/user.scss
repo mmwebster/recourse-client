@@ -1,0 +1,17 @@
+.user-view {
+  height: 100%;
+
+  .user-content {
+    height: 100%;
+
+    .md-sidenav-left {
+      .header {
+      }
+    }
+  }
+
+  // nested views
+  @import 'user/dashboard';
+  @import 'user/settings';
+  @import 'user/onboard';
+}

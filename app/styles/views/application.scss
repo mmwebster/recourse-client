@@ -2,3 +2,21 @@ html, body, body > .ember-view {
   height: 100%;
   width: 100%;
 }
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 400;
+}
+
+.uppercase {
+  text-transform: capitalize;
+}
+
+.application-view {
+  height: 100%;
+
+  // nested views
+  @import 'index';
+  @import 'page-not-found';
+  @import 'users';
+  @import 'user';
+}

@@ -1,17 +1,7 @@
 // Imports
 @import 'ember-paper';
-// view imports
+@import 'variables';
+@import 'colors';
+
+// view imports (hierarchical..each import their own nested view scss files)
 @import 'views/application';
-@import 'views/index';
-@import 'views/page-not-found';
-@import 'views/users';
-@import 'views/users/confirmation';
-@import 'views/users/login';
-@import 'views/users/sign-up';
-@import 'views/user';
-@import 'views/user/dashboard';
-@import 'views/user/settings';
-@import 'views/user/onboard';
-@import 'views/user/onboard/school';
-@import 'views/user/onboard/degree-path';
-@import 'views/user/onboard/prior-coursework';

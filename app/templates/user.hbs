@@ -1,3 +1,69 @@
 <div class="user-view">
-  {{outlet}}
+  {{#paper-sidenav-container class="user-content"}}
+
+    {{#paper-sidenav
+      class="md-whiteframe-z2 layout-column sidenav"
+      name="left"
+      open=leftSideBarOpen
+      onToggle=(action (mut leftSideBarOpen))
+    }}
+    {{#paper-toolbar class="layout-column header" as |toolbar|}}
+
+      <div class="logo layout-row">
+        <h1>Reqourse</h1>
+        <h6>BETA</h6>
+      </div>
+
+      <div class="slogan layout-column">
+        <h4>Plan your schedule. Plan your future.</h4>
+      </div>
+
+    {{/paper-toolbar}}
+      {{#paper-content class="layout-column" padding=true}}
+        Item
+      {{/paper-content}}
+    {{/paper-sidenav}}
+
+
+    {{#paper-card-content class="flex"}}
+
+      {{#paper-toolbar as |toolbar|}}
+
+        {{#toolbar.tools}}
+
+          {{#paper-sidenav-toggle name="left" class="hide-gt-sm" as |toggleAction|}}
+            {{#paper-button iconButton=true onClick=(action toggleAction)}}
+              {{paper-icon "menu"}}
+            {{/paper-button}}
+          {{/paper-sidenav-toggle}}
+
+          <h2 class="uppercase"><span class="rq-yellow">Reqourse</span> > {{pathName}}</h2>
+
+          <span class="flex"></span>
+
+          <h5>Hi, <strong class="uppercase">{{sessionAccount.account.nameFirst}}</strong></h5>
+
+          {{#link-to 'user.settings'}}
+            {{#paper-button raised=routeIsSettings disabled=routeIsSettings onClick='changePathToSettings' iconButton=true}}
+              {{paper-icon "person"}}
+            {{/paper-button}}
+          {{/link-to}}
+
+          {{#link-to 'user.dashboard'}}
+            {{#paper-button raised=routeIsDashboard disabled=routeIsDashboard onClick='changePathToDashboard' iconButton=true}}
+              {{paper-icon "home"}}
+            {{/paper-button}}
+          {{/link-to}}
+
+        {{/toolbar.tools}}
+
+      {{/paper-toolbar}}
+
+      <div class="user-inner-content">
+        {{outlet}}
+      </div>
+
+    {{/paper-card-content}}
+
+  {{/paper-sidenav-container}}
 </div>

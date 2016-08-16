@@ -1,0 +1,5 @@
+.users-view {
+  @import 'users/confirmation';
+  @import 'users/login';
+  @import 'users/sign-up';
+}
