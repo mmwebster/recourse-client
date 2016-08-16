@@ -1,16 +1,73 @@
-{{#if confirmed}}
-  <h3>Your account has been confirmed!</h3>
-  {{#link-to 'users.login'}}Go login{{/link-to}}
-{{else if confirming}}
-  <h3>Confirming your account..</h3>
-{{else}}
-  <h3>Please click on the link emailed to you in order to activate your account.</h3>
-  <button>!Resend confirmation email!</button>
-{{/if}}
+<div class="confirmation-view layout-column">
+  <div id="confirmation-info">
+    {{#if confirmed}}
+      <h3>Your account has been confirmed!</h3>
+      {{#link-to 'users.login'}}Go login{{/link-to}}
+    {{else if isConfirming}}
+      <div class="layout-row">
+        <h3>Confirming your account</h3>
+        {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+      </div>
+    {{else}}
+      <h3>Please click on the link emailed to you in order to activate your account.</h3>
+      {{#paper-button raised=true onClick=(action 'resendConfirmationEmail')}}!Resend confirmation email!{{/paper-button}}
+    {{/if}}
+  </div>
 
-{{#if errorMessage}}
-  <hr />
-  {{errorMessage}}
-  <hr />
-{{/if}}
-{{outlet}}
+  <div class="success-dialog">
+    {{#if confirmed}}
+      {{#paper-dialog parent="#confirmation-info" origin=dialogOrigin clickOutsideToClose=true}}
+        <form>
+          {{#paper-toolbar}}
+            <div class="md-toolbar-tools">
+              <h2>Email Confirmed</h2>
+              <span class="flex"></span>
+            </div>
+          {{/paper-toolbar}}
+
+          {{#paper-dialog-content}}
+            <div style="max-width:800px;max-height:810px;">
+              <p>You've successfully confirmed your emailed account. Login to start using Reqourse!</p>
+            </div>
+          {{/paper-dialog-content}}
+
+          {{#paper-dialog-actions class="layout-row"}}
+            <span class="flex"></span>
+            {{#paper-button primary=true onClick=(action "closeSuccessDialog" "ok")}}Login{{/paper-button}}
+          {{/paper-dialog-actions}}
+        </form>
+      {{/paper-dialog}}
+    {{/if}}
+  </div>
+
+  <div class="error-dialog">
+    {{#if showErrorDialog}}
+      {{#paper-dialog onClose=(action "closeErrorDialog" "cancel") parent="#confirmation-info" origin=dialogOrigin clickOutsideToClose=true}}
+        <form>
+          {{#paper-toolbar}}
+            <div class="md-toolbar-tools">
+              <h2>There was a problem confirming your account</h2>
+              <span class="flex"></span>
+              {{#paper-button iconButton=true onClick=(action "closeErrorDialog" "cancel")}}{{paper-icon icon="close"}}{{/paper-button}}
+            </div>
+          {{/paper-toolbar}}
+
+          {{#paper-dialog-content}}
+            <div style="max-width:800px;max-height:810px;">
+              <p>
+                {{errorMessage}}
+              </p>
+              <p>Be careful that you visit the email confirmation link exactly as it is in your email.</p>
+            </div>
+          {{/paper-dialog-content}}
+
+          {{#paper-dialog-actions class="layout-row"}}
+            <span class="flex"></span>
+            {{#paper-button onClick=(action "closeErrorDialog" "cancel")}}Cancel{{/paper-button}}
+            {{#paper-button onClick=(action "closeErrorDialog" "ok")}}OK{{/paper-button}}
+          {{/paper-dialog-actions}}
+        </form>
+      {{/paper-dialog}}
+    {{/if}}
+  </div>
+</div>
