@@ -1,1 +1,22 @@
-{{outlet}}
+<div class="onboard-view">
+  {{paper-progress-linear value=onboardProgressValue}}
+  <div class="layout-row layout-align-space-around-center progress-buttons">
+    <div class="layout-row flex-50 layout-align-space-between-center">
+      {{#paper-button primary=routeIsSchool raised=true fab=true mini=true onClick=(action "transition" "user.onboard.school")}}
+        1
+      {{/paper-button}}
+
+      {{#paper-button primary=routeIsDegreePath raised=true fab=true mini=true onClick=(action "transition" "user.onboard.degree-path")}}
+        2
+      {{/paper-button}}
+
+      {{#paper-button primary=routeIsPriorCoursework raised=true fab=true mini=true onClick=(action "transition" "user.onboard.prior-coursework")}}
+        3
+      {{/paper-button}}
+    </div>
+  </div>
+  <div>
+    Current path: {{path}}
+  </div>
+  {{outlet}}
+</div>

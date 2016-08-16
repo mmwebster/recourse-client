@@ -1,4 +1,10 @@
 .onboard-view {
+  .progress-buttons {
+    button {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
   @import 'onboard/school';
   @import 'onboard/degree-path';
   @import 'onboard/prior-coursework';

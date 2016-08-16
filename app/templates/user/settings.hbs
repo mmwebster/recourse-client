@@ -1,52 +1,54 @@
-<h3>Settings</h3>
+<div class="settings-view">
+  <h3>Settings</h3>
 
-{{#paper-content class="md-whiteframe-z1 list-demo list-controls-demo"}}
-  {{#paper-list}}
-    {{#paper-subheader class="md-no-sticky"}}General{{/paper-subheader}}
+  {{#paper-content class="md-whiteframe-z1 list-demo list-controls-demo"}}
+    {{#paper-list}}
+      {{#paper-subheader class="md-no-sticky"}}General{{/paper-subheader}}
 
-    {{#paper-item}}
-      <p>School</p>
-      {{edit-school account=sessionAccount.account}}
-    {{/paper-item}}
+      {{#paper-item}}
+        <p>School</p>
+        {{edit-school account=sessionAccount.account}}
+      {{/paper-item}}
 
-    {{paper-divider}}
-    {{paper-divider}}
+      {{paper-divider}}
+      {{paper-divider}}
 
-    {{#paper-subheader class="md-no-sticky"}}Account{{/paper-subheader}}
+      {{#paper-subheader class="md-no-sticky"}}Account{{/paper-subheader}}
 
-    {{#paper-item}}
-      <p>Name</p>
-      <div><p>{{sessionAccount.account.nameFull}}</p></div>
-    {{/paper-item}}
+      {{#paper-item}}
+        <p>Name</p>
+        <div><p>{{sessionAccount.account.nameFull}}</p></div>
+      {{/paper-item}}
 
-    {{#paper-item}}
-      <p>Sign in count</p>
-      <div>
-        <p>{{sessionAccount.account.signInCount}}</p>
-      </div>
-    {{/paper-item}}
+      {{#paper-item}}
+        <p>Sign in count</p>
+        <div>
+          <p>{{sessionAccount.account.signInCount}}</p>
+        </div>
+      {{/paper-item}}
 
-    {{#paper-item onClick="openLogoutDialog"}}
-      <p>Logout</p>
-      {{#paper-button class="md-secondary" raised=true warn=true}}Logout{{/paper-button}}
-    {{/paper-item}}
+      {{#paper-item onClick="openLogoutDialog"}}
+        <p>Logout</p>
+        {{#paper-button class="md-secondary" raised=true warn=true}}Logout{{/paper-button}}
+      {{/paper-item}}
 
-  {{/paper-list}}
-{{/paper-content}}
+    {{/paper-list}}
+  {{/paper-content}}
 
 
-{{#if showLogoutDialog}}
-  {{#paper-dialog fullscreen=fullscreen onClose=(action "closeLogoutDialog" "cancel") origin=dialogOrigin}}
+  {{#if showLogoutDialog}}
+    {{#paper-dialog fullscreen=fullscreen onClose=(action "closeLogoutDialog" "cancel") origin=dialogOrigin}}
 
-    {{#paper-dialog-content}}
-      <h2 class="md-title">Are you sure you'd like to logout?</h2>
-    {{/paper-dialog-content}}
+      {{#paper-dialog-content}}
+        <h2 class="md-title">Are you sure you'd like to logout?</h2>
+      {{/paper-dialog-content}}
 
-    {{#paper-dialog-actions class="layout-row"}}
-      <span class="flex"></span>
-      {{#paper-button primary=true onClick=(action "closeLogoutDialog" "cancel")}}Cancel{{/paper-button}}
-      {{#paper-button primary=true warn=true onClick=(action "closeLogoutDialog" "logout" dogName)}}Logout{{/paper-button}}
-    {{/paper-dialog-actions}}
+      {{#paper-dialog-actions class="layout-row"}}
+        <span class="flex"></span>
+        {{#paper-button primary=true onClick=(action "closeLogoutDialog" "cancel")}}Cancel{{/paper-button}}
+        {{#paper-button primary=true warn=true onClick=(action "closeLogoutDialog" "logout" dogName)}}Logout{{/paper-button}}
+      {{/paper-dialog-actions}}
 
-  {{/paper-dialog}}
-{{/if}}
+    {{/paper-dialog}}
+  {{/if}}
+</div>
