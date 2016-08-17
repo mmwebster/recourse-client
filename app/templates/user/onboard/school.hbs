@@ -6,27 +6,25 @@
 
   <div id="form" class="layout-column form">
 
-    {{#paper-form onSubmit='submit' as |form|}}
+    {{#paper-form onSubmit='saveAndContinue' as |form|}}
 
       {{#paper-select
         placeholder="Select your school"
-        value=selectedSchool
-        onChange=(action (mut selectedSchool))
+        value=displayedSchoolTitle
+        onChange=(action (mut selectedSchoolTitle))
       }}
-        {{#with model as |schools|}}
-          {{#each schools as |school|}}
-            {{#paper-option value=school.title}}
-              {{school.title}}
-            {{/paper-option}}
-          {{/each}}
-        {{/with}}
+        {{#each model.schools as |school|}}
+          {{#paper-option value=school.title}}
+            {{school.title}}
+          {{/paper-option}}
+        {{/each}}
       {{/paper-select}}
 
       <div class="layout-row">
         {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action form.onSubmit)}}
           <div class="layout-row">
             <div class="">
-              Continue
+              Save and Continue
             </div>
             <div class="">
               {{! Loading spinner}}

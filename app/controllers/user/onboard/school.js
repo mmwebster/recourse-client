@@ -6,21 +6,37 @@ export default Ember.Controller.extend({
   sessionAccount: Ember.inject.service('session-account'),
   continueDisabled: true,
   isRequesting: false,
-  schoolDidChange: Ember.observer('selectedSchool', function() {
-    if (!isEmpty(this.get('selectedSchool'))) {
+  // retrieved from the store
+  persistedSchoolTitle: Ember.computed('model.school.title', function() {
+    this.set('continueDisabled', false);
+    return this.get('model.school.title');
+  }),
+  // retrieved from user input
+  selectedSchoolTitle: null,
+  // displayed to user
+  displayedSchoolTitle: Ember.computed('persistedSchoolTitle', 'selectedSchoolTitle', function() {
+    if (this.get('selectedSchoolTitle') === null) {
+      return this.get('persistedSchoolTitle');
+    } else {
+      return this.get('selectedSchoolTitle');
+    }
+  }),
+
+  schoolDidChange: Ember.observer('displayedSchoolTitle', function() {
+    if (!isEmpty(this.get('displayedSchoolTitle'))) {
       this.set('continueDisabled', false);
     }
   }),
   user: null,
 
   actions: {
-    submit: function() {
+    saveAndContinue: function() {
       this.set('isRequesting', true);
       var _this = this;
-      if (!isEmpty(this.get('selectedSchool'))) {
+      if (!isEmpty(this.get('displayedSchoolTitle'))) {
         // selection present
-        var selectedSchoolTitle = this.get('selectedSchool');
-        var selectedSchool = this.get('model').findBy('title', selectedSchoolTitle);
+        var displayedSchoolTitle = this.get('displayedSchoolTitle');
+        var selectedSchool = this.get('model.schools').findBy('title', displayedSchoolTitle);
 
         // user not fetched
         this.store.findRecord('user', this.get('sessionAccount.account.id')).then(function(user) {

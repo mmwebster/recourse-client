@@ -10,6 +10,12 @@ export default Ember.Controller.extend({
     return isEmpty(this.get('model.degreeMajors'));
   }),
 
+  // Stores degreeMajors/Minors to have their remove persisted
+  itemsToRemoveOnContinue: [],
+
+  // Stores degreeMajors/Minors to have their addition persisted
+  itemsToAddOnContinue: [],
+
   // Ember-paper doesn't make it easy to use ids for values in forms :/
   findRecordByTitle: function(title, type) {
     if (type === "major") {
@@ -21,21 +27,47 @@ export default Ember.Controller.extend({
 
   actions: {
     removeDegreeMajor: function(degreeMajor) {
+      // remove from UI
       this.get('model.degreeMajors').removeObject(degreeMajor);
+      // push to removal list
+      this.get('itemsToRemoveOnContinue').addObject(degreeMajor);
     },
     removeDegreeMinor: function(degreeMinor) {
+      // remove from UI
       this.get('model.degreeMinors').removeObject(degreeMinor);
+      // push to removal list
+      this.get('itemsToRemoveOnContinue').addObject(degreeMinor);
     },
     addDegreeMajor: function(degreeMajorTitle) {
       var degreeMajor = this.findRecordByTitle(degreeMajorTitle, 'major');
-      this.get('model.degreeMajors').addObject(degreeMajor);
+      this.get('model.degreeMajors').pushObject(degreeMajor);
+      // push to add list
+      this.get('itemsToAddOnContinue').addObject(degreeMajor);
     },
     addDegreeMinor: function(degreeMinorTitle) {
       var degreeMinor = this.findRecordByTitle(degreeMinorTitle, 'minor');
-      this.get('model.degreeMinors').addObject(degreeMinor);
+      this.get('model.degreeMinors').pushObject(degreeMinor);
+      // push to add list
+      this.get('itemsToAddOnContinue').addObject(degreeMinor);
     },
     saveAndContinue: function() {
-      alert("Haven't implemented transition and save yet.");
+      // set user feedback
+      this.get('isRequesting', true);
+
+      // get the removal/addition lists
+      let removals = this.get('itemsToRemoveOnContinue');
+      let additions = this.get('itemsToAddOnContinue');
+      // retrieve unpersisted objects and save them
+      removals.forEach(function(item) {
+        item.save();
+      });
+      additions.forEach(function(item) {
+        item.save();
+      });
+
+      // clear user feedback and transition
+      this.get('isRequesting', false);
+      this.transitionToRoute('user.onboard.prior-coursework');
     }
   }
 });

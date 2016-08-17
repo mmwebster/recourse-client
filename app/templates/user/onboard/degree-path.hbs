@@ -7,14 +7,12 @@
   <div id="form" class="layout-column form">
 
     {{! Majors }}
-    {{#paper-subheader class="md-no-sticky"}}Majors{{/paper-subheader}}
     {{! Insert }}
     {{degree-path-insert items=model.school.degreeMajors type='major' onInsert=(action 'addDegreeMajor')}}
     {{! List, Delete }}
     {{degree-path-list items=model.degreeMajors type='major' onDelete=(action 'removeDegreeMajor')}}
 
     {{! Minors }}
-    {{#paper-subheader class="md-no-sticky"}}Minors{{/paper-subheader}}
     {{! Insert }}
     {{degree-path-insert items=model.school.degreeMinors type='minor' onInsert=(action 'addDegreeMinor')}}
     {{! List, Delete }}
@@ -26,7 +24,7 @@
       {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action 'saveAndContinue')}}
         <div class="layout-row">
           <div class="">
-            Continue
+            Save and Continue
           </div>
           <div class="">
             {{! Loading spinner}}
