@@ -16,7 +16,7 @@ export default Ember.Component.extend({
         this.set('removePromptTitle', "Are you sure you want to remove this minor?");
       }
       // set remove prompt content
-      this.set('removePromptContent', item.title);
+      this.set('removePromptContent', item.get('title'));
       this.set('itemToDelete', item);
       this.set('displayRemoveItemPrompt', true);
     },

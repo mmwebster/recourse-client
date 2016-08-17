@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
     // remove the first element `user`
     path.shift();
     // remove `index` if it exists
-    var index = path.indexOf("index")
+    var index = path.indexOf("index");
     if (index !== -1) {
       path.splice(index, 1);
     }

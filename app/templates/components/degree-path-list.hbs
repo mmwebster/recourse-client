@@ -22,17 +22,17 @@
 {{/paper-content}}
 
 {{#if displayRemoveItemPrompt}}
-  {{#paper-dialog fullscreen=fullscreen onClose=(action "closeRemoveItemPrompt" "cancel") origin=dialogOrigin}}
+  {{#paper-dialog fullscreen=fullscreen onClose=(action "closeRemoveItemPrompt" "cancel")}}
 
     {{#paper-dialog-content}}
-    <h2 class="md-title">{{removePromptTitle}}</h2>
-    <p class="uppercase">{{removePromptContent}}</p>
+      <h2 class="md-title">{{removePromptTitle}}</h2>
+      <p class="uppercase">{{removePromptContent}}</p>
     {{/paper-dialog-content}}
 
     {{#paper-dialog-actions class="layout-row"}}
       <span class="flex"></span>
       {{#paper-button primary=true onClick=(action "closeRemoveItemPrompt" "cancel")}}Cancel{{/paper-button}}
-      {{#paper-button primary=true warn=true onClick=(action "closeRemoveItemPrompt" "remove" dogName)}}Remove{{/paper-button}}
+      {{#paper-button primary=true warn=true onClick=(action "closeRemoveItemPrompt" "remove")}}Remove{{/paper-button}}
     {{/paper-dialog-actions}}
 
   {{/paper-dialog}}

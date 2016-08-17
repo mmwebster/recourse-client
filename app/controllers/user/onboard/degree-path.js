@@ -5,7 +5,10 @@ const { isEmpty } = Ember;
 export default Ember.Controller.extend({
   sessionAccount: Ember.inject.service('session-account'),
   isRequesting: false,
-  continueDisabled: true,
+  // continue disabled if no major is selected
+  continueDisabled: Ember.computed('model.degreeMajors', function() {
+    return isEmpty(this.get('model.degreeMajors'));
+  }),
 
   // Ember-paper doesn't make it easy to use ids for values in forms :/
   findRecordByTitle: function(title, type) {
@@ -16,34 +19,20 @@ export default Ember.Controller.extend({
     }
   },
 
-
-       /*
-        *
-        *
-        * left off adding in he findRecord stuff and then need to put into actions to
-        * limit code duplication and then should be able to just remove/add the objects in 
-        * each action and the save the record all together (user) when the user presses contineu
-        *
-        *
-        * */
-
-
-
   actions: {
     removeDegreeMajor: function(degreeMajor) {
       this.get('model.degreeMajors').removeObject(degreeMajor);
     },
     removeDegreeMinor: function(degreeMinor) {
-      debugger;
       this.get('model.degreeMinors').removeObject(degreeMinor);
     },
-    addDegreeMajor: function(degreeMajor) {
-      debugger;
-      this.get('school.degreeMajors').addObject(degreeMajor);
+    addDegreeMajor: function(degreeMajorTitle) {
+      var degreeMajor = this.findRecordByTitle(degreeMajorTitle, 'major');
+      this.get('model.degreeMajors').addObject(degreeMajor);
     },
-    addDegreeMinor: function(degreeMinor) {
-      debugger;
-      this.get('school.degreeMinors').addObject(degreeMinor);
+    addDegreeMinor: function(degreeMinorTitle) {
+      var degreeMinor = this.findRecordByTitle(degreeMinorTitle, 'minor');
+      this.get('model.degreeMinors').addObject(degreeMinor);
     },
     saveAndContinue: function() {
       alert("Haven't implemented transition and save yet.");

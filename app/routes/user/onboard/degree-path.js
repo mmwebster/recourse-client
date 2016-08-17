@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { service } = Ember.inject
+const { service } = Ember.inject;
 
 export default Ember.Route.extend({
   sessionAccount: service('session-account'),

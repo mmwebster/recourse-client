@@ -2,19 +2,17 @@
 
   <div id="form" class="layout-column form">
 
-    {{#paper-form as |form|}}
-      {{#paper-select
-        placeholder=placeholderText
-        value=itemToAdd
-        onChange=(action (mut itemToAdd))
-      }}
-        {{#each items as |item|}}
-          {{#paper-option value=item.title}}
-            {{item.title}}
-          {{/paper-option}}
-        {{/each}}
-      {{/paper-select}}
-    {{/paper-form}}
+    {{#paper-select
+      placeholder=placeholderText
+      value=itemToAdd
+      onChange=(action (mut itemToAdd))
+    }}
+      {{#each items as |item|}}
+        {{#paper-option value=item.title}}
+          {{item.title}}
+        {{/paper-option}}
+      {{/each}}
+    {{/paper-select}}
 
   </div>
 
