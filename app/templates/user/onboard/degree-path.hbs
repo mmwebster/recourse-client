@@ -8,44 +8,40 @@
 
     {{#paper-form onSubmit='submit' as |form|}}
 
-
-      {{! List selected majors (and delete buttons)}}
+      {{! Majors }}
       {{#paper-subheader class="md-no-sticky"}}Majors{{/paper-subheader}}
-      {{degree-path-list items=school.degreeMajors type='majors' onDelete=(action 'deleteDegreeMajor')}}
+      {{! Insert }}
+      {{degree-path-insert items=model.school.degreeMajors type='major' onInsert=(action 'addDegreeMajor')}}
+      {{! List, Delete }}
+      {{degree-path-list items=model.degreeMajors type='major' onDelete=(action 'removeDegreeMajor')}}
 
-      {{! Select new major}}
-
-      {{! List selected minors (and delete buttons)}}
+      {{! Minors }}
       {{#paper-subheader class="md-no-sticky"}}Minors{{/paper-subheader}}
-      {{degree-path-list items=school.degreeMinors type='minors' onDelete=(action 'deleteDegreeMinor')}}
+      {{! Insert }}
+      {{degree-path-insert items=model.school.degreeMinors type='minor' onInsert=(action 'addDegreeMinor')}}
+      {{! List, Delete }}
+      {{degree-path-list items=model.degreeMinors type='minor' onDelete=(action 'removeDegreeMinor')}}
 
-      {{! Select new minor}}
 
 
-      {{degree-major-item}}
-      {{degree-minor-item}}
-      {{#link-to 'user.onboard.prior-coursework'}}Onboard, prior coursework{{/link-to}}
-      {{outlet}}
-
+      <div class="layout-row">
+        {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action 'saveAndContinue')}}
+          <div class="layout-row">
+            <div class="">
+              Continue
+            </div>
+            <div class="">
+              {{! Loading spinner}}
+              {{#if isRequesting}}
+                {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+              {{/if}}
+            </div>
+          </div>
+        {{/paper-button}}
+      </div>
 
     {{/paper-form}}
   </div>
-
-  {{#if displayDeletePrompt}}
-    {{#paper-dialog fullscreen=fullscreen onClose=(action "closeLogoutDialog" "cancel") origin=dialogOrigin}}
-
-      {{#paper-dialog-content}}
-        <h2 class="md-title">Are you sure you'd like to logout?</h2>
-      {{/paper-dialog-content}}
-
-      {{#paper-dialog-actions class="layout-row"}}
-        <span class="flex"></span>
-        {{#paper-button primary=true onClick=(action "closeLogoutDialog" "cancel")}}Cancel{{/paper-button}}
-        {{#paper-button primary=true warn=true onClick=(action "closeLogoutDialog" "logout" dogName)}}Logout{{/paper-button}}
-      {{/paper-dialog-actions}}
-
-    {{/paper-dialog}}
-  {{/if}}
 
 </div>
 

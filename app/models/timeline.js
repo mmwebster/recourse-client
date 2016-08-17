@@ -6,5 +6,5 @@ export default Model.extend({
   title: attr('string'),
   quarters: hasMany('quarter'),
   courses: hasMany('courses'),
-  user: belongsTo('user')
+  user: belongsTo('user'),
 });

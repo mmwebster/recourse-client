@@ -7,6 +7,6 @@ export default Model.extend({
   courses: hasMany('course'),
   users: hasMany('user'),
   nodes: hasMany('node'),
-  degreeMajors: hasMany('degreeMajoy'),
-  degreeMinor: hasMany('degreeMinor'),
+  degreeMajors: hasMany('degreeMajor'),
+  degreeMinors: hasMany('degreeMinor'),
 });

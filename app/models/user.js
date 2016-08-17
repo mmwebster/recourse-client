@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
   school: belongsTo('school'),
@@ -12,6 +12,8 @@ export default Model.extend({
   password: attr('string'),
   passwordConfirmation: attr('string'),
   email: attr('string'),
+  degreeMajors: hasMany('degreeMajor'),
+  degreeMinors: hasMany('degreeMinor'),
 
   nameFull: Ember.computed('nameFirst', 'nameLast', function() {
     return this.get('nameFirst') + " " + this.get('nameLast');

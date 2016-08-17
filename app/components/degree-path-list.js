@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   actions: {
     removeItemPrompt: function(item) {
       // set remove prompt title
-      if (this.get('type') === 'majors') {
+      if (this.get('type') === 'major') {
         this.set('removePromptTitle', "Are you sure you want to remove this major?");
       } else {
         this.set('removePromptTitle', "Are you sure you want to remove this minor?");

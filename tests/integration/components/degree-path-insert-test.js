@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('degree-major-item', 'Integration | Component | degree major item', {
+moduleForComponent('degree-path-insert', 'Integration | Component | degree path insert', {
   integration: true
 });
 
@@ -9,15 +9,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{degree-major-item}}`);
+  this.render(hbs`{{degree-path-insert}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#degree-major-item}}
+    {{#degree-path-insert}}
       template block text
-    {{/degree-major-item}}
+    {{/degree-path-insert}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
