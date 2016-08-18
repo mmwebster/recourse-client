@@ -8,6 +8,10 @@
       .header {
       }
     }
+    // located inside child template (not user template)
+    .user-inner-content {
+      padding: 0px 25px;
+    }
   }
 
   // nested views
