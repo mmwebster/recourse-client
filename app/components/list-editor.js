@@ -24,11 +24,6 @@ export default Ember.Component.extend({
   itemToAdd: null,
   itemToRemove: null,
 
-  // Send up an initial info of list state
-  didRender: function() {
-    this.bubbleOnChange();
-  },
-
   // Get the source items filtered by searchTerm
   sourceItems: Ember.computed('sourceItemsPromiseObject.content', 'searchTerm', function() {
     var items = this.get('sourceItemsPromiseObject.content');
@@ -68,7 +63,6 @@ export default Ember.Component.extend({
     return this.get(this.get('destinationPath'));
   }),
 
-
   // Add item if selected
   itemAdded: Ember.observer('itemToAdd', function() {
     var item = this.get('itemToAdd');
@@ -82,10 +76,7 @@ export default Ember.Component.extend({
     let destinationPath = this.get('destinationPath');
     let destination = this.get(destinationPath);
     destination.addObject(item);
-    item.save().then(function() {
-      // Bubble it up
-      _this.bubbleOnChange();
-    });
+    item.save();
   },
 
   removeItemFromDestination: function(item) {
@@ -93,18 +84,16 @@ export default Ember.Component.extend({
     let destinationPath = this.get('destinationPath');
     let destination = this.get(destinationPath);
     destination.removeObject(item);
-    item.save().then(function() {
-      // Bubble it up
-      _this.bubbleOnChange();
-    });
+    item.save();
   },
 
-  bubbleOnChange: function() {
+  // Bubble up info about items on change
+  bubbleOnChange: Ember.observer('destinationItems.length', function() {
     if (this.get('onChange')) {
       let numItems = this.get('destinationItems.length');
       this.get('onChange')({ numItems: numItems });
     }
-  },
+  }),
 
   actions: {
     // Save each object that was modified and bubble up if onSave is defined.
