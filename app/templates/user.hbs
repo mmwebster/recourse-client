@@ -20,7 +20,15 @@
 
     {{/paper-toolbar}}
       {{#paper-content class="layout-column" padding=true}}
-        Item
+
+        {{! Majors }}
+        {{! Insert, List, Delete }}
+        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='degreeMajors' itemModelAlias='major'}}
+
+        {{! Minors }}
+        {{! Insert, List, Delete }}
+        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='degreeMinors' itemModelAlias='minor'}}
+
       {{/paper-content}}
     {{/paper-sidenav}}
 

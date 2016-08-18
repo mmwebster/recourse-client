@@ -8,11 +8,11 @@
 
     {{! Majors }}
     {{! Insert, List, Delete }}
-    {{list-editor sourceModel='school' sourceId=9 itemsModel='degreeMajors' itemModelAlias='major' onChange=(action 'updateContinueButton')}}
+    {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='degreeMajors' itemModelAlias='major' onChange=(action 'updateContinueButton')}}
 
     {{! Minors }}
     {{! Insert, List, Delete }}
-    {{list-editor sourceModel='school' sourceId=9 itemsModel='degreeMinors' itemModelAlias='minor'}}
+    {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='degreeMinors' itemModelAlias='minor'}}
 
     <div class="layout-row">
       {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action 'continueOn')}}

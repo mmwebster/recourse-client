@@ -23,6 +23,14 @@ export default Ember.Component.extend({
   removeItemPromptContent: null,
   itemToAdd: null,
   itemToRemove: null,
+  bubbleMeTriggers: false,
+
+  // TODO find a way to trigger action on parent during initialization of
+  //      component without using this. It is deprecated behavior, as it's
+  //      really inefficient, causing a re-render of the view during a render.
+  didRender: function() {
+    this.toggleProperty('bubbleMeTriggers');
+  },
 
   // Get the source items filtered by searchTerm
   sourceItems: Ember.computed('sourceItemsPromiseObject.content', 'searchTerm', function() {
@@ -88,12 +96,15 @@ export default Ember.Component.extend({
   },
 
   // Bubble up info about items on change
-  bubbleOnChange: Ember.observer('destinationItems.length', function() {
+  rebubble: Ember.observer('bubbleMeTriggers', 'destinationItems.length', function() {
+    this.bubbleOnChange();
+  }),
+  bubbleOnChange: function() {
     if (this.get('onChange')) {
       let numItems = this.get('destinationItems.length');
       this.get('onChange')({ numItems: numItems });
     }
-  }),
+  },
 
   actions: {
     // Save each object that was modified and bubble up if onSave is defined.
