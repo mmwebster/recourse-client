@@ -1,6 +1,36 @@
 <div class="dashboard-view user-inner-content">
   <h3>Dashboard</h3>
 
+  {{paper-divider}}
+
+  <div class="layout-row">
+    <div class="layout-row">
+
+      {{#paper-button primary=true class="slim-button"}}
+        <div class="layout-row layout-align-space-around-center">
+          <h4 class="slim-h4">
+            Save this timeline
+          </h4>
+          {{#paper-button primary=true raised=false iconButton=true}}
+            {{paper-icon 'add circle'}}
+          {{/paper-button}}
+        </div>
+      {{/paper-button}}
+
+      {{#paper-button primary=false class="slim-button"}}
+        <div class="layout-row layout-align-space-around-center">
+          <h4 class="slim-h4">
+            My CS/TIM Timeline
+          </h4>
+          {{#paper-button primary=false warn=true raised=false iconButton=true}}
+            {{paper-icon 'remove circle'}}
+          {{/paper-button}}
+        </div>
+      {{/paper-button}}
+
+    </div>
+  </div>
+
   {{#paper-content class="md-whiteframe-z1 list-demo list-controls-demo"}}
     <p>Dashboard to contain the active timeline and the majority of all Reqourse features.</p>
   {{/paper-content}}
