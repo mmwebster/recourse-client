@@ -8,15 +8,14 @@
       closeOnClick=false
       onToggle=(action (mut leftSideBarOpen))
     }}
-    {{#paper-toolbar class="layout-column header" as |toolbar|}}
+    {{#paper-toolbar class="layout-column header layout-align-center-center" as |toolbar|}}
 
-      <div class="logo layout-row">
-        <h1>Reqourse</h1>
-        <h6>BETA</h6>
-      </div>
-
-      <div class="slogan layout-column">
-        <h4>Plan your schedule. Plan your future.</h4>
+      <div class="layout-column header-inner layout-align-center-center">
+        <div class="logo layout-row">
+          <h1 class="rq-yellow">Reqourse</h1>
+          <h6>BETA</h6>
+        </div>
+        <h5 class="slogan">Plan your schedule. Plan your future.</h5>
       </div>
 
     {{/paper-toolbar}}

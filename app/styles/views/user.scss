@@ -6,6 +6,15 @@
 
     .md-sidenav-left {
       .header {
+        .header-inner {
+          .logo * {
+            margin-bottom: 10px;
+          }
+          .slogan {
+            margin-top: 20px;
+            text-align: center;
+          }
+        }
       }
     }
     // located inside child template (not user template)
