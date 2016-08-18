@@ -7,3 +7,10 @@
 @import 'views/application';
 // component imports (NOT hiearchical, so must import each individually)
 @import 'components/list-editor';
+
+
+// general styles that don't fall into predeinfed
+// hard-code the width of the popups for selection lists
+body > .ember-view.md-default-theme.md-select-menu-container.md-clickable.md-active {
+  width: 336px;
+}

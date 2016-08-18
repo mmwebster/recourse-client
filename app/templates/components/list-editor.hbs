@@ -24,7 +24,7 @@
       class='select-with-search'
       as |items|
     }}
-      {{#paper-select-header}}
+      {{#paper-select-header class='select-with-search-inner'}}
         <input value={{searchTerm}}
                 type="search"
                 placeholder={{searchPlaceholder}}
@@ -35,9 +35,9 @@
       {{#each filteredSourceItems as |item|}}
 
         {{#paper-option value=item}}
-        <div class="layout-row layout-align-space-between">
-          {{item.title}}
-        </div>
+          <div class="layout-row layout-align-space-between">
+            {{item.title}}
+          </div>
         {{/paper-option}}
 
       {{/each}}

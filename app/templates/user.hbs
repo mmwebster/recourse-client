@@ -5,6 +5,7 @@
       class="md-whiteframe-z2 layout-column sidenav"
       name="left"
       open=leftSideBarOpen
+      closeOnClick=false
       onToggle=(action (mut leftSideBarOpen))
     }}
     {{#paper-toolbar class="layout-column header" as |toolbar|}}
@@ -28,6 +29,10 @@
         {{! Minors }}
         {{! Insert, List, Delete }}
         {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='degreeMinors' itemModelAlias='minor'}}
+
+        {{! Prior coursework }}
+        {{! Insert, List, Delete }}
+        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='courses' itemModelAlias='course'}}
 
       {{/paper-content}}
     {{/paper-sidenav}}
