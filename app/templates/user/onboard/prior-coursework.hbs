@@ -1,4 +1,26 @@
-<p>Options to check, for prior coursework:</p>
-{{course-item}}
-{{#link-to 'user.dashboard'}}Go to your Dashboard{{/link-to}}
-{{outlet}}
+<div class="prior-coursework-view layout-column">
+  <div>
+    <h3>Select the courses that you've satisfied</h3>
+  </div>
+
+  <div id="form" class="layout-column form">
+    {{list-editor sourceModel='school' sourceId=9 itemsModel='courses' itemModelAlias='course'}}
+  </div>
+
+  <div class="layout-row">
+    {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action 'continueOn')}}
+      <div class="layout-row">
+        <div class="">
+          Continue
+        </div>
+        <div class="">
+          {{! Loading spinner}}
+          {{#if isRequesting}}
+            {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+          {{/if}}
+        </div>
+      </div>
+    {{/paper-button}}
+  </div>
+
+</div>

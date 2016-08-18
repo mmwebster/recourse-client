@@ -7,24 +7,18 @@
   <div id="form" class="layout-column form">
 
     {{! Majors }}
-    {{! Insert }}
-    {{degree-path-insert items=model.school.degreeMajors type='major' onInsert=(action 'addDegreeMajor')}}
-    {{! List, Delete }}
-    {{degree-path-list items=model.degreeMajors type='major' onDelete=(action 'removeDegreeMajor')}}
+    {{! Insert, List, Delete }}
+    {{list-editor sourceModel='school' sourceId=9 itemsModel='degreeMajors' itemModelAlias='major' onChange=(action 'updateContinueButton')}}
 
     {{! Minors }}
-    {{! Insert }}
-    {{degree-path-insert items=model.school.degreeMinors type='minor' onInsert=(action 'addDegreeMinor')}}
-    {{! List, Delete }}
-    {{degree-path-list items=model.degreeMinors type='minor' onDelete=(action 'removeDegreeMinor')}}
-
-
+    {{! Insert, List, Delete }}
+    {{list-editor sourceModel='school' sourceId=9 itemsModel='degreeMinors' itemModelAlias='minor'}}
 
     <div class="layout-row">
-      {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action 'saveAndContinue')}}
+      {{#paper-button disabled=continueDisabled raised=true primary=true onClick=(action 'continueOn')}}
         <div class="layout-row">
           <div class="">
-            Save and Continue
+            Continue
           </div>
           <div class="">
             {{! Loading spinner}}

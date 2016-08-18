@@ -5,3 +5,5 @@
 
 // view imports (hierarchical..each import their own nested view scss files)
 @import 'views/application';
+// component imports (NOT hiearchical, so must import each individually)
+@import 'components/list-editor';

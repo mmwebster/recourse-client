@@ -1,0 +1,89 @@
+{{! 
+  *sourceModel: Name of model that itemModel is retrieved from (Ex/ 'school')
+  *destinationModel: Name of model that itemModel is pushed to (Ex/ 'user')
+  //XX*sourceId: ID of model instance that itemModel is retrieved from (Ex/ 'school')
+  //XX*destinationId: ID of model instance that itemModel is pushed to (Ex/ 'user')
+  *itemsModel: Name of model (in pluralized form!) corresponding to the items
+               listed, inserted, removed (Ex/ 'course')
+  itemModelAlias: Name to be displayed in deletion warnings (Ex/ 'my course
+                  alias')
+  onChange: Action to be triggered on parent when the number of items added to
+            the destinationModel has changed
+
+  @desc: Defaults to display the title attribute of the itemModel in the list
+}}
+
+<div class="list-editor-component">
+  {{! Insert new entries}}
+  <div class="insert">
+    {{#paper-select
+      placeholder=selectPlaceholder
+      value=itemToAdd
+      itemLabelCallback=itemLabelCallback
+      onChange=(action (mut itemToAdd))
+      class='select-with-search'
+      as |items|
+    }}
+      {{#paper-select-header}}
+        <input value={{searchTerm}}
+                type="search"
+                placeholder={{searchPlaceholder}}
+                class="searchbox rq-blue"
+                onkeydown={{action "searchKeyPressed"}}
+                oninput={{action (mut searchTerm) value="target.value"}} />
+      {{/paper-select-header}}
+      {{#each filteredSourceItems as |item|}}
+
+        {{#paper-option value=item}}
+        <div class="layout-row layout-align-space-between">
+          {{item.title}}
+        </div>
+        {{/paper-option}}
+
+      {{/each}}
+    {{/paper-select}}
+  </div>
+
+  {{! List current entries, allow deletion}}
+  <div class="list">
+    {{#paper-content}}
+      {{#paper-list}}
+        {{#each destinationItems as |item|}}
+          {{#paper-item class="md-3-line list-item"}}
+            <div class="md-list-item-text list-item-text">
+              <div class="layout-row layout-align-space-between">
+                <div class="layout-column layout-align-space-around-start">
+                  <h4>{{item.title}}</h4>
+                </div>
+                <div>
+                  {{#paper-button warn=true iconButton=true onClick=(action 'openRemoveItemPrompt' item)}}
+                    {{paper-icon "remove circle"}}
+                  {{/paper-button}}
+                </div>
+              </div>
+            </div>
+          {{/paper-item}}
+          {{paper-divider}}
+        {{/each}}
+      {{/paper-list}}
+    {{/paper-content}}
+
+    {{#if displayRemoveItemPrompt}}
+      {{#paper-dialog fullscreen=fullscreen onClose=(action "closeRemoveItemPrompt" "cancel")}}
+
+        {{#paper-dialog-content}}
+          <h2 class="md-title">{{removeItemPromptTitle}}</h2>
+          <p class="uppercase">{{removeItemPromptContent}}</p>
+        {{/paper-dialog-content}}
+
+        {{#paper-dialog-actions class="layout-row"}}
+          <span class="flex"></span>
+          {{#paper-button primary=true onClick=(action "closeRemoveItemPrompt" "cancel")}}Cancel{{/paper-button}}
+          {{#paper-button primary=true warn=true onClick=(action "closeRemoveItemPrompt" "remove")}}Remove{{/paper-button}}
+        {{/paper-dialog-actions}}
+
+      {{/paper-dialog}}
+    {{/if}}
+  </div>
+
+</div>

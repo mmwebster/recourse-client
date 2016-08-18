@@ -18,6 +18,7 @@ export default Model.extend({
   concurrent_children: hasMany('course'),
   quarters: hasMany('quarter'),
   nodes: hasMany('node'),
+  user: belongsTo('user'),
 
   cid: Ember.computed('subject', 'number', function() {
     return this.get('subject') + this.get('number');

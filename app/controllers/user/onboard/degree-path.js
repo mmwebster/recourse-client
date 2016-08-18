@@ -6,9 +6,7 @@ export default Ember.Controller.extend({
   sessionAccount: Ember.inject.service('session-account'),
   isRequesting: false,
   // continue disabled if no major is selected
-  continueDisabled: Ember.computed('model.degreeMajors', function() {
-    return isEmpty(this.get('model.degreeMajors'));
-  }),
+  continueDisabled: true,
 
   // Stores degreeMajors/Minors to have their remove persisted
   itemsToRemoveOnContinue: [],
@@ -26,47 +24,12 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    removeDegreeMajor: function(degreeMajor) {
-      // remove from UI
-      this.get('model.degreeMajors').removeObject(degreeMajor);
-      // push to removal list
-      this.get('itemsToRemoveOnContinue').addObject(degreeMajor);
+    updateContinueButton: function(itemsInfo) {
+      // set continueDisabled if num degree majors < 1
+      let numDegreeMajors = itemsInfo.numItems;
+      this.set('continueDisabled', (numDegreeMajors < 1));
     },
-    removeDegreeMinor: function(degreeMinor) {
-      // remove from UI
-      this.get('model.degreeMinors').removeObject(degreeMinor);
-      // push to removal list
-      this.get('itemsToRemoveOnContinue').addObject(degreeMinor);
-    },
-    addDegreeMajor: function(degreeMajorTitle) {
-      var degreeMajor = this.findRecordByTitle(degreeMajorTitle, 'major');
-      this.get('model.degreeMajors').pushObject(degreeMajor);
-      // push to add list
-      this.get('itemsToAddOnContinue').addObject(degreeMajor);
-    },
-    addDegreeMinor: function(degreeMinorTitle) {
-      var degreeMinor = this.findRecordByTitle(degreeMinorTitle, 'minor');
-      this.get('model.degreeMinors').pushObject(degreeMinor);
-      // push to add list
-      this.get('itemsToAddOnContinue').addObject(degreeMinor);
-    },
-    saveAndContinue: function() {
-      // set user feedback
-      this.get('isRequesting', true);
-
-      // get the removal/addition lists
-      let removals = this.get('itemsToRemoveOnContinue');
-      let additions = this.get('itemsToAddOnContinue');
-      // retrieve unpersisted objects and save them
-      removals.forEach(function(item) {
-        item.save();
-      });
-      additions.forEach(function(item) {
-        item.save();
-      });
-
-      // clear user feedback and transition
-      this.get('isRequesting', false);
+    continueOn: function() {
       this.transitionToRoute('user.onboard.prior-coursework');
     }
   }
