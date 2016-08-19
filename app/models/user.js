@@ -5,7 +5,7 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
   school: belongsTo('school'),
-  // timelines: hasMany('timeline'),
+  timelines: hasMany('timeline'),
   courses: hasMany('course'), // prior coursework
   nameFirst: attr('string'),
   nameLast: attr('string'),

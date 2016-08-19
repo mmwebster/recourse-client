@@ -7,4 +7,6 @@ export default Model.extend({
   quarters: hasMany('quarter'),
   courses: hasMany('courses'),
   user: belongsTo('user'),
+  isCurrent: attr('boolean'),
+  startingSeason: attr('string'),
 });

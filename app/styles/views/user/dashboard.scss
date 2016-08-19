@@ -3,10 +3,30 @@
   .slim-button {
     margin: 0px;
     padding: 0px;
+    margin-right: 20px;
   }
   .slim-h4 {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0px 10px;
+  }
+  .current-timeline > .title {
+    h3 {
+      text-align: left;
+      font-weight: 300;
+    }
+  }
+  .current-timeline {
+    .quarter > .title {
+      padding: 10px 0px;
+      font-weight: 300;
+      min-width: 175px;
+      text-align: center;
+      min-height: auto;
+      border-right: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .quarter .no-courses-text {
+      text-align: center;
+    }
   }
 }

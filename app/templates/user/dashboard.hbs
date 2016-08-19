@@ -1,15 +1,26 @@
 <div class="dashboard-view user-inner-content">
-  <h3>Dashboard</h3>
-
-  {{paper-divider}}
+  <!--h3>Dashboard</h3-->
 
   <div class="layout-row">
     <div class="layout-row">
 
+      {{#each timelines as |timeline|}}
+        {{#paper-button raised=timeline.isCurrent class="slim-button"}}
+          <div class="layout-row layout-align-space-around-center">
+            <h4 class="slim-h4">
+              {{timeline.title}}
+            </h4>
+            {{#paper-button primary=false warn=true raised=false iconButton=true}}
+              {{paper-icon 'remove circle'}}
+            {{/paper-button}}
+          </div>
+        {{/paper-button}}
+      {{/each}}
+
       {{#paper-button primary=true class="slim-button"}}
         <div class="layout-row layout-align-space-around-center">
           <h4 class="slim-h4">
-            Save this timeline
+            New timeline
           </h4>
           {{#paper-button primary=true raised=false iconButton=true}}
             {{paper-icon 'add circle'}}
@@ -17,21 +28,52 @@
         </div>
       {{/paper-button}}
 
-      {{#paper-button primary=false class="slim-button"}}
-        <div class="layout-row layout-align-space-around-center">
-          <h4 class="slim-h4">
-            My CS/TIM Timeline
-          </h4>
-          {{#paper-button primary=false warn=true raised=false iconButton=true}}
-            {{paper-icon 'remove circle'}}
-          {{/paper-button}}
-        </div>
-      {{/paper-button}}
-
     </div>
   </div>
 
-  {{#paper-content class="md-whiteframe-z1 list-demo list-controls-demo"}}
-    <p>Dashboard to contain the active timeline and the majority of all Reqourse features.</p>
-  {{/paper-content}}
+  <div class="layout-column current-timeline">
+    <div class="title">
+      <h3>{{currentTimeline.title}}</h3>
+    </div>
+    <div class="years layout-row layout-wrap layout-align-space-between-start">
+      {{! TODO implement year model in the backend }}
+      {{!#each currentYears as |year|}}
+        <div class="year layout-row">
+        {{!#paper-content class="md-whiteframe-z1 list-demo list-controls-demo year layout-row"}}
+          {{#each currentTimeline.quarters as |quarter|}}
+            <div class="quarter layout-column">
+              {{#paper-toolbar class="title uppercase"}}
+                <span>{{quarter.season}} {{quarter.startYear}}</span>
+              {{/paper-toolbar}}
+              {{#paper-content class="md-whiteframe-z1 list-demo courses layout-column"}}
+                {{#paper-list}}
+                  {{#each quarter.courses as |course|}}
+                    {{#paper-item class="md-3-line course"}}
+                      <div class="md-list-item-text">
+                        <h4>{{course.subject}} {{course.number}}</h4>
+                        <p>{{course.title}}</p>
+                      </div>
+                    {{/paper-item}}
+                    {{paper-divider}}
+                  {{else}}
+                    {{#paper-item class="md-3-line course"}}
+                      <div class="md-list-item-text">
+                        <p class="no-courses-text">- No courses -</p>
+                      </div>
+                    {{/paper-item}}
+                  {{/each}}
+                {{/paper-list}}
+              {{/paper-content}}
+
+            </div>
+          {{else}}
+            <p>No quarters</p>
+          {{/each}}
+
+        {{!/paper-content}}
+        </div>
+      {{!/each}}
+    </div>
+  </div>
+
 </div>
