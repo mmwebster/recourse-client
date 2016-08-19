@@ -11,4 +11,6 @@ export default Model.extend({
   user: belongsTo('user'),
   isCurrent: attr('boolean'),
   startingSeason: attr('string'),
+  degreeMajors: hasMany('degreeMajor'),
+  degreeMinors: hasMany('degreeMinor'),
 });
