@@ -37,10 +37,10 @@
     </div>
     <div class="years layout-row layout-wrap layout-align-space-between-start">
       {{! TODO implement year model in the backend }}
-      {{!#each currentYears as |year|}}
-        <div class="year layout-row">
+      {{#each currentYears as |year|}}
+        <div class="year flex-50 layout-row">
         {{!#paper-content class="md-whiteframe-z1 list-demo list-controls-demo year layout-row"}}
-          {{#each currentTimeline.quarters as |quarter|}}
+          {{#each year.quarters as |quarter|}}
             <div class="quarter layout-column">
               {{#paper-toolbar class="title uppercase"}}
                 <span>{{quarter.season}} {{quarter.startYear}}</span>
@@ -72,7 +72,7 @@
 
         {{!/paper-content}}
         </div>
-      {{!/each}}
+      {{/each}}
     </div>
   </div>
 

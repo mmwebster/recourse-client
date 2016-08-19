@@ -17,16 +17,21 @@
     }
   }
   .current-timeline {
-    .quarter > .title {
-      padding: 10px 0px;
-      font-weight: 300;
-      min-width: 175px;
-      text-align: center;
-      min-height: auto;
-      border-right: 1px solid rgba(0, 0, 0, 0.12);
-    }
-    .quarter .no-courses-text {
-      text-align: center;
+    .years {
+      .year {
+        padding: 0px 20px 20px 0px;
+        .quarter > .title {
+          padding: 10px 0px;
+          font-weight: 300;
+          min-width: 130px;
+          text-align: center;
+          min-height: auto;
+          border-right: 1px solid rgba(0, 0, 0, 0.12);
+        }
+        .quarter .no-courses-text {
+          text-align: center;
+        }
+      }
     }
   }
 }

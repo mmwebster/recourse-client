@@ -3,7 +3,9 @@
 
   .user-content {
     height: 100%;
-
+    .main-content {
+      overflow-y: scroll;
+    }
     .md-sidenav-left {
       .header {
         .header-inner {

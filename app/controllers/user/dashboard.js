@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
         title: 'My First Timeline',
         isCurrent: true,
       });
-      user.pushRecord(timeline);
+      user.get('timelines').pushObject(timeline);
       return timeline.save().then(function(timeline) {
         return timeline;
       });
@@ -27,17 +27,22 @@ export default Ember.Controller.extend({
     }
   }),
 
-  // currentYears: Ember.computed('currentTimeline.quarters', function() {
-  //   var quarters = this.get('currentTimeline.quarters');
-  //   var years = [];
-  //   var quarterIndex = 0;
-  //   debugger;
-  //   while (quarterIndex <= quarters.get('length')) {
-  //     years.push(quarters.slice(quarterIndex, 3));
-  //     quarterIndex += 3;
-  //   }
-  //   return years;
-  // }),
+  // breaks currentTimeline of quarters into years
+  currentYears: Ember.computed('currentTimeline.quarters', function() {
+    var years = [{ quarters: [] }];
+    var yearIndex = 0;
+    this.get('currentTimeline.quarters').forEach(function(quarter, i) {
+      // If it's the first quarter in the year (and not the first quarter), move
+      // on to the next year
+      if (quarter.get('season') === 'fall' && i > 0) {
+        years.push({ quarters: [] });
+        yearIndex += 1;
+      }
+      // Add the quarter to its year
+      years[yearIndex].quarters.pushObject(quarter);
+    });
+    return years;
+  }),
 
   actions: {
     sayHi: function(hi) {
