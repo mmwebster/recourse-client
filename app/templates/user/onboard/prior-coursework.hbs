@@ -4,7 +4,7 @@
   </div>
 
   <div id="form" class="layout-column form">
-    {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='courses' itemModelAlias='course'}}
+    {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='user' destinationId=sessionAccount.account.id itemsModel='courses' itemModelAlias='course'}}
   </div>
 
   <div class="layout-row">

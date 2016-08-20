@@ -17,9 +17,9 @@ export default Ember.Controller.extend({
   // Ember-paper doesn't make it easy to use ids for values in forms :/
   findRecordByTitle: function(title, type) {
     if (type === "major") {
-      return this.get('model.school.degreeMajors').findBy('title', title);
+      return this.get('sessionAccount.account.school.degreeMajors').findBy('title', title);
     } else {
-      return this.get('model.school.degreeMinors').findBy('title', title);
+      return this.get('sessionAccount.account.school.degreeMinors').findBy('title', title);
     }
   },
 

@@ -5,6 +5,7 @@ const { service } = Ember.inject;
 export default Ember.Controller.extend({
   session: service('session'),
   sessionAccount: service('session-account'),
+
   // Return path parts names after /user for bread crumbs
   applicationController: Ember.inject.controller("application"),
   path: Ember.computed('applicationController.currentPath', function() {

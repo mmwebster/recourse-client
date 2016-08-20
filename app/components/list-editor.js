@@ -10,7 +10,6 @@ const { inject: { service }, isEmpty } = Ember;
 
 export default Ember.Component.extend({
   store: service(),
-  sessionAccount: service(),
   isRequesting: false, // true when the store is being queried
   selectPlaceholder: Ember.computed('itemModelAlias', function() {
     return 'Add a ' + this.get('itemModelAlias') + '...';
@@ -23,7 +22,8 @@ export default Ember.Component.extend({
   removeItemPromptContent: null,
   itemToAdd: null,
   itemToRemove: null,
-  bubbleMeTriggers: false,
+  // lesser evil out of possible solutions for bubbling up when needed
+  bubbleMeTriggers: false, 
 
   // TODO find a way to trigger action on parent during initialization of
   //      component without using this. It is deprecated behavior, as it's
@@ -58,18 +58,21 @@ export default Ember.Component.extend({
       })
     });
   }),
-  filteredSourceItems: Ember.computed('sourceItems', function() {
-    return this.get('sourceItems');
-  }),
+  filteredSourceItems: Ember.computed.alias('sourceItems'),
 
 
   // Get the destination items
-  destinationPath: Ember.computed('itemsModel', function() {
-    return 'sessionAccount.account.' + this.get('itemsModel');
+  destinationItems: Ember.computed.alias('destinationItemsPromiseObject.content'),
+  destinationItemsPromiseObject: Ember.computed(function() {
+    // This is necessary for nested promises in the computed property
+    var _this = this;
+    return DS.PromiseObject.create({
+      promise: this.get('store').findRecord(_this.get('destinationModel'), _this.get('destinationId')).then((destination) => {
+        return destination.get(_this.get('itemsModel'));
+      })
+    });
   }),
-  destinationItems: Ember.computed('destinationPath', function() {
-    return this.get(this.get('destinationPath'));
-  }),
+
 
   // Add item if selected
   itemAdded: Ember.observer('itemToAdd', function() {
@@ -80,18 +83,14 @@ export default Ember.Component.extend({
     }
   }),
   addItemToDestination: function(item) {
-    var _this = this;
-    let destinationPath = this.get('destinationPath');
-    let destination = this.get(destinationPath);
-    destination.addObject(item);
+    let destinationItems = this.get('destinationItems');
+    destinationItems.addObject(item);
     item.save();
   },
 
   removeItemFromDestination: function(item) {
-    var _this = this;
-    let destinationPath = this.get('destinationPath');
-    let destination = this.get(destinationPath);
-    destination.removeObject(item);
+    let destinationItems = this.get('destinationItems');
+    destinationItems.removeObject(item);
     item.save();
   },
 

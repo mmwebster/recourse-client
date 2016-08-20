@@ -23,15 +23,15 @@
 
         {{! Majors }}
         {{! Insert, List, Delete }}
-        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='timeline' destinationId=1 itemsModel='degreeMajors' itemModelAlias='major'}}
+        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='timeline' destinationId=model.id itemsModel='degreeMajors' itemModelAlias='major'}}
 
         {{! Minors }}
         {{! Insert, List, Delete }}
-        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='timeline' destinationId=1 itemsModel='degreeMinors' itemModelAlias='minor'}}
+        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='timeline' destinationId=model.id itemsModel='degreeMinors' itemModelAlias='minor'}}
 
         {{! Prior coursework }}
         {{! Insert, List, Delete }}
-        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id itemsModel='courses' itemModelAlias='course'}}
+        {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='user' destinationId=sessionAccount.account.id itemsModel='courses' itemModelAlias='course'}}
 
       {{/paper-content}}
     {{/paper-sidenav}}
