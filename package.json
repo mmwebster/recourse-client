@@ -46,7 +46,7 @@
     "ember-data": "^2.6.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
-    "ember-paper": "1.0.0-alpha.3",
+    "ember-paper": "git+https://github.com/mmwebster/ember-paper.git#c1b6f68da03dce249586c2a6fadb1801e7632dbb",
     "ember-resolver": "^2.0.3",
     "ember-simple-auth": "1.1.0",
     "ember-welcome-page": "^1.0.1",

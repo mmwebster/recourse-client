@@ -33,7 +33,12 @@
 
   <div class="layout-column current-timeline">
     <div class="title">
-      <h3>{{currentTimeline.title}}</h3>
+      <h3>
+        {{currentTimeline.title}}
+        {{#paper-button primary=true disabled=syncDisabled iconButton=true onClick=(action 'sync')}}{{paper-icon 'sync'}}{{/paper-button}}
+        <button {{action 'syncit'}}>toggle</button>
+        <button {{action 'debugMe'}}>Debug Me</button>
+      </h3>
     </div>
     <div class="years layout-row layout-wrap layout-align-space-between-start">
       {{! TODO implement year model in the backend }}

@@ -8,6 +8,9 @@ module.exports = function(defaults) {
     fingerprint: {
       prepend: 'https://s3-us-west-1.amazonaws.com/reqourse-assets/reqourse-client/',
     },
+    autoprefixer: {
+      browsers: ['last 3 versions']
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
