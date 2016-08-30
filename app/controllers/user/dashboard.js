@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   timelines: Ember.computed.alias('model'),
   user: Ember.computed.alias('sessionAccount.account'),
   syncDisabled: Ember.computed.not('currentTimeline.sync'),
+  syncingInProgress: false,
 
   currentTimeline: Ember.computed('model', function() {
     var timelines = this.get('model');
@@ -61,14 +62,12 @@ export default Ember.Controller.extend({
     // TODO: Improve this to only reload the currentTimeline instead of all
     //       timelines in the model.
     sync() {
-      // Persist sync=true
-      var timeline = this.get('currentTimeline');
-      timeline.save().then(() => {
-        // Reload the record to retrieve the up-to-date quarters mapping
-        this.get('model').findBy('isCurrent', true).reload().then((model) => {
-          this.set('currentTimeline.sync', false);
-          console.log("Timeline reloaded");
-        });
+      // Change sync button to loading
+      this.set('syncingInProgress', true);
+      // Fetch updated timeline
+      this.get('currentTimeline').save().then((timeline) => {
+        // Set back to sync button
+        this.set('syncingInProgress', false);
       });
     },
     syncit() {

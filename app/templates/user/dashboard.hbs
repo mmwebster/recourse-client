@@ -34,9 +34,16 @@
   <div class="layout-column current-timeline">
     <div class="title">
       <h3>
-        {{currentTimeline.title}}
-        {{#paper-button primary=true disabled=syncDisabled iconButton=true onClick=(action 'sync')}}{{paper-icon 'sync'}}{{/paper-button}}
-        <button {{action 'syncit'}}>toggle</button>
+        {{#if syncingInProgress}}
+          {{! Display loading spinner}}
+          {{! TODO: Better user feedback that syncing is in progress }}
+          <strong>{{currentTimeline.title}}</strong>
+          {{#paper-button primary=true disabled=syncDisabled iconButton=true onClick=(action 'sync')}}{{paper-icon 'sync'}}{{/paper-button}}
+        {{else}}
+          {{currentTimeline.title}}
+          {{! Display sync button}}
+          {{#paper-button primary=true disabled=syncDisabled iconButton=true onClick=(action 'sync')}}{{paper-icon 'sync'}}{{/paper-button}}
+        {{/if}}
         <button {{action 'debugMe'}}>Debug Me</button>
       </h3>
     </div>
