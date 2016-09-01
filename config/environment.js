@@ -28,8 +28,9 @@ module.exports = function(environment) {
   // For every environment
   ENV['ember-simple-auth'] = {
     authenticationRoute: 'users.login',
-    routeAfterAuthentication: 'user.dashboard',
-    routeIfAlreadyAuthenticated: 'user.dashboard'
+    // user.index route handles redirection to the correct student or admin dashboard
+    routeAfterAuthentication: 'user.index',
+    routeIfAlreadyAuthenticated: 'user.index'
   };
 
   if (environment === 'development') {

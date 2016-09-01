@@ -8,13 +8,40 @@ export default Service.extend({
 
   loadCurrentUser() {
     return new RSVP.Promise((resolve, reject) => {
-      const id = this.get('session.data.authenticated.id');
-      if (!isEmpty(id)) {
-        return this.get('store').find('user', id).then((user) => {
-          this.set('account', user);
-          console.log("uid is " + user.get('id'));
-          resolve();
-        }, reject);
+      if (this.get('session.isAuthenticated')) {
+        // is authenticated
+        var type = this.get('session.data.authenticated.type');
+        switch(type) {
+          case 'Student':
+            // type is student
+            var id = this.get('session.data.authenticated.id');
+            if (!isEmpty(id)) {
+              return this.get('store').find('student', id).then((user) => {
+                this.set('account', user);
+                console.log("SID: " + user.get('id'));
+                resolve();
+              }, reject);
+            } else {
+              resolve();
+            }
+            break;
+          case 'Admin':
+            // type is student
+            var id = this.get('session.data.authenticated.id');
+            if (!isEmpty(id)) {
+              return this.get('store').find('admin', id).then((user) => {
+                this.set('account', user);
+                console.log("AID: " + user.get('id'));
+                resolve();
+              }, reject);
+            } else {
+              resolve();
+            }
+            break;
+          default:
+            throw 'ERROR: invalid user type';
+            break;
+        }
       } else {
         resolve();
       }

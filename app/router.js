@@ -10,13 +10,19 @@ Router.map(function() {
   // Authenticated Routes
   // ***********************
   this.route('user', function() {
-    this.route('dashboard');
-    this.route('settings');
-    this.route('onboard', function() {
-      this.route('school');
-      this.route('degree-path');
-      this.route('prior-coursework');
+    this.route('student', function() {
+      this.route('dashboard');
+      this.route('settings');
+      this.route('onboard', function() {
+        this.route('school');
+        this.route('degree-path');
+        this.route('prior-coursework');
+      });
     });
+    this.route('admin', function() {
+      this.route('dashboard');
+    });
+    this.route('logout');
   });
   // temporary debugging routes
   this.route('models', function() {

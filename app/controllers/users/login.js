@@ -34,6 +34,7 @@ export default Ember.Controller.extend({
       let { email, password } = this.getProperties('email', 'password');
       this.set('isRequesting', true);
 
+      var _this = this;
       return this.get('session').authenticate('authenticator:devise', email, password).catch((reason) => {
         this.set('isRequesting', false);
         this.set('errorMessage', reason.error);

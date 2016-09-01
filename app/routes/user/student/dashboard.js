@@ -4,7 +4,7 @@ const { service } = Ember.inject;
 export default Ember.Route.extend({
   sessionAccount: service('session-account'),
 
-  model: function() {
+  model() {
     return this.get('sessionAccount.account.timelines');
   },
 

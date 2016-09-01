@@ -11,12 +11,19 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   },
 
   sessionAuthenticated() {
-    var _this = this;
     this._loadCurrentUser().then(() => {
-      if (_this.get('session.data.authenticated.sign_in_count') === 1) {
-        _this.transitionTo('user.onboard.school');
-      } else {
-        _this.transitionTo('user.dashboard');
+      // Transition user to their correct auth route
+      switch(this.get('session.data.authenticated.type')) {
+        case "Student":
+          if (this.get('session.data.authenticated.sign_in_count') === 1) {
+            this.transitionTo('user.student.onboard.school');
+          } else {
+            this.transitionTo('user.student.dashboard');
+          }
+          break;
+        case "Admin":
+          this.transitionTo('user.admin.dashboard');
+          break;
       }
     }).catch(() => this.get('session').invalidate());
     // this._super(...arguments);
