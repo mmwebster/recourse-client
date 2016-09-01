@@ -1,0 +1,18 @@
+<div class="layout-row form-toolbar">
+  {{paper-input class="input" flex=30 label="Title" value=titleFilter onChange=(action (mut titleFilter))}}
+</div>
+
+{{#paper-content}}
+  {{#paper-list}}
+    {{#each filteredItems as |item|}}
+      {{#paper-item class="md-3-line list-item"}}
+        <div class="md-list-item-text list-item-text">
+          <div class="layout-row layout-align-space-between">
+            {{yield item}}
+          </div>
+        </div>
+      {{/paper-item}}
+      {{paper-divider}}
+    {{/each}}
+  {{/paper-list}}
+{{/paper-content}}

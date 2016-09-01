@@ -5,7 +5,8 @@ import { hasMany } from 'ember-data/relationships';
 export default Model.extend({
   title: attr('string'),
   courses: hasMany('course'),
-  users: hasMany('user'),
+  students: hasMany('student'),
+  admins: hasMany('admin'),
   nodes: hasMany('node'),
   degreeMajors: hasMany('degreeMajor'),
   degreeMinors: hasMany('degreeMinor'),

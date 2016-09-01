@@ -21,8 +21,6 @@ a, a * {
   padding: 10px 15px;
 }
 
-
-
 .uppercase {
   text-transform: capitalize;
 }
@@ -35,4 +33,11 @@ a, a * {
   @import 'page-not-found';
   @import 'users';
   @import 'user';
+}
+
+.form-toolbar {
+  border-bottom: 1px solid #ad102f;
+  .input {
+    margin: 0px;
+  }
 }

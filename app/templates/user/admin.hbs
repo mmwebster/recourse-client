@@ -1,1 +1,81 @@
-{{outlet}}
+<div class="user-view admin-view">
+  {{#paper-sidenav-container class="user-content"}}
+
+    {{#paper-sidenav
+      class="md-whiteframe-z2 layout-column sidenav"
+      name="left"
+      open=leftSideBarOpen
+      closeOnClick=false
+      onToggle=(action (mut leftSideBarOpen))
+    }}
+    {{#paper-toolbar class="admin-bg-color layout-column header layout-align-center-center" as |toolbar|}}
+
+      <div class="layout-column header-inner layout-align-center-center">
+        <div class="logo layout-row">
+          <h1 class="rq-yellow">Reqourse</h1>
+          <h6>BETA</h6>
+        </div>
+        <h5 class="slogan">Plan your schedule. Plan your future.</h5>
+      </div>
+
+    {{/paper-toolbar}}
+      {{#paper-content class="layout-column" padding=true}}
+
+      {{#paper-button onClick=(action 'transition' 'user.admin.students')}}Students{{/paper-button}}
+      {{#paper-button onClick=(action 'transition' 'user.admin.courses')}}Courses{{/paper-button}}
+      {{#paper-button onClick=(action 'transition' 'user.admin.degree-majors')}}Degree Majors{{/paper-button}}
+      {{#paper-button onClick=(action 'transition' 'user.admin.degree-minors')}}Degree Minors{{/paper-button}}
+
+      {{/paper-content}}
+    {{/paper-sidenav}}
+
+
+    {{#paper-card-content class="flex main-content"}}
+
+      {{#paper-toolbar class="admin-bg-color" as |toolbar|}}
+
+        {{#toolbar.tools}}
+
+          {{#paper-sidenav-toggle name="left" class="hide-gt-sm" as |toggleAction|}}
+            {{#paper-button iconButton=true onClick=(action toggleAction)}}
+              {{paper-icon "menu"}}
+            {{/paper-button}}
+          {{/paper-sidenav-toggle}}
+
+          <h2 class="uppercase">
+            <span class="rq-yellow">Reqourse</span>
+            {{#each path as |pathPart|}}
+              > {{pathPart}}
+            {{/each}}
+          </h2>
+
+          <span class="flex"></span>
+
+          <h5>Hi, <strong class="uppercase">{{sessionAccount.account.nameFirst}}</strong></h5>
+
+          {{#paper-button raised=routeIsSettings disabled=routeIsSettings iconButton=true}}
+            {{#link-to 'user.admin.settings'}}
+              {{paper-icon "person"}}
+            {{/link-to}}
+          {{/paper-button}}
+
+          {{#paper-button raised=routeIsDashboard disabled=routeIsDashboard iconButton=true}}
+            {{#link-to 'user.admin.dashboard'}}
+              {{paper-icon "home"}}
+            {{/link-to}}
+          {{/paper-button}}
+
+        {{/toolbar.tools}}
+
+      {{/paper-toolbar}}
+
+      <div>
+        <div class="user-inner-content">
+          {{outlet}}
+        </div>
+      </div>
+
+    {{/paper-card-content}}
+
+  {{/paper-sidenav-container}}
+</div>

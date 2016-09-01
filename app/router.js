@@ -21,6 +21,11 @@ Router.map(function() {
     });
     this.route('admin', function() {
       this.route('dashboard');
+      this.route('settings');
+      this.route('students');
+      this.route('courses');
+      this.route('degree-majors');
+      this.route('degree-minors');
     });
     this.route('logout');
   });
