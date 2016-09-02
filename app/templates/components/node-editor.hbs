@@ -1,48 +1,90 @@
 {{! list node's properties }}
-<div class="layout-column node-wrapper">
-  <div class="layout-row layout-align-space-between node {{if nodeIsPivot 'type-pivot' 'type-course'}} {{if nodeIsntRoot 'non-root'}}">
-    {{click-to-edit
-      attr=node.title
-      label="Title"
-    }}
+<div class="layout-column node-wrapper {{if node.hidden 'hidden'}} {{if nodeIsntRoot 'non-root'}}">
+  <div class="layout-row layout-align-space-between node type-{{node.type}}">
+    {{#unless nodeIsntRoot}}
+      <h4>Root node</h4>
+    {{else}}
+      {{! type independent attrs}}
+      {{click-to-edit
+        attr=node.title
+        label="Title"
+      }}
 
-    {{click-to-edit
-      attr=node.numChildrenRequired
-      label="Num C. Req."
-    }}
+      {{! pivot type attrs}}
+      {{#if nodeIsPivot}}
+        {{click-to-edit
+          attr=node.numChildrenRequired
+          label="Num C. Req."
+        }}
+      {{/if}}
 
-    {{click-to-edit
-      attr=node.childrenSelected
-      label="C. Selected"
-    }}
+      {{! course type attrs}}
+      {{#if nodeIsCourse}}
+        {{click-to-edit
+          attr=node.parentRel
+          label="Parent Rel"
+        }}
 
-    {{click-to-edit
-      attr=node.numDescendants
-      label="Num Desc."
-      disabled=true
-    }}
+        {{click-to-edit
+          attr=node.courseId
+          label="Course ID"
+        }}
+      {{/if}}
+      {{!click-to-edit
+        attr=node.childrenSelected
+        label="C. Selected"
+      }}
 
-    {{click-to-edit
-      attr=node.isDuplicate
-      label="Is Duplicate"
-    }}
+      {{!click-to-edit
+        attr=node.numDescendants
+        label="Num Desc."
+        disabled=true
+      }}
 
-    {{click-to-edit
-      attr=node.parentRel
-      label="Parent Rel"
-    }}
+      {{!click-to-edit
+        attr=node.isDuplicate
+        label="Is Duplicate"
+      }}
 
-    {{click-to-edit
-      attr=node.courseId
-      label="Course ID"
-    }}
+    {{/unless}}
+
+    <div class="layout-row  layout-align-space-around-center">
+      {{#if nodeIsntRoot}}
+        {{#paper-button
+          onClick=(action 'deleteSelf')
+          iconButton=true
+          warn=true
+        }}
+          {{paper-icon 'remove circle'}}
+        {{/paper-button}}
+      {{/if}}
+
+      {{#paper-button
+        onClick=(action 'createChild' 'pivot')
+        iconButton=true
+      }}
+        {{paper-icon 'add circle'}}
+      {{/paper-button}}
+
+      {{#paper-button
+        onClick=(action 'createChild' 'course')
+        iconButton=true
+        primary=true
+      }}
+        {{paper-icon 'add circle'}}
+      {{/paper-button}}
+    </div>
 
   </div>
 
   {{! reccur on node's children if they exist}}
   {{#if nodeHasChildren}}
     {{#each node.children as |child|}}
-      {{node-editor node=child parentRecurrenceDepth=recurrenceDepth}}
+      {{node-editor
+        node=child
+        parentRecurrenceDepth=recurrenceDepth
+        onDelete=(action 'deleteChild')
+      }}
     {{/each}}
   {{/if}}
 </div>

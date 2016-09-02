@@ -16,6 +16,10 @@
     margin-left: 0px;
     padding-left: 0px;
   }
+  .no-space-top {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
   .node {
     border-radius: 3px;
     margin-bottom: 10px;
@@ -24,8 +28,14 @@
       display: none;
     }
   }
-  .node.non-root {
-    margin-left: 10px;
+  .node-wrapper.hidden {
+    display: none;
+  }
+  .node-wrapper.non-root {
+    margin-left: 20px;
+  }
+  .node.type-root {
+    background-color: rgba(0,0,0,.1);
   }
   .node.type-pivot {
     background-color: rgba(250,250,0,.3);

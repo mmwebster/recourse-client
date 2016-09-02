@@ -17,6 +17,9 @@ export default Ember.Component.extend({
   nodeIsPivot: Ember.computed('node.type', function() {
     return (this.get('node.type') === 'pivot');
   }),
+  nodeIsCourse: Ember.computed('node.type', function() {
+    return (this.get('node.type') === 'course');
+  }),
   nodeIsntRoot: Ember.computed('recurrenceDepth', function() {
     return (this.get('recurrenceDepth') > 1);
   }),
@@ -24,12 +27,23 @@ export default Ember.Component.extend({
   actions: {
     // @desc Create a child node of type 'pivot' or 'course'
     createChild(type) {
-      switch(type) {
-        case 'pivot':
-          break;
-        case 'course':
-          break;
+      // init node's children if empty
+      if (Ember.isEmpty(this.get('node.children'))) {
+        this.set('node.children', []);
       }
+      // append a new empty node to the children
+      this.get('node.children').push({type: type, children: []});
+    },
+    deleteSelf() {
+      // hide self, acting as deleted
+      this.set('node.hidden', true);
+      // trigger action on parent to actual remove the node
+      this.get('onDelete')(this.get('node'));
+    },
+    deleteChild(child) {
+      var node = this.get('node');
+      var childIndex = node.children.indexOf(child);
+      node.children.splice(childIndex, 1);
     },
   }
 });
