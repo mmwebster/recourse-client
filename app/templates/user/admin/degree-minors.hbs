@@ -1,8 +1,12 @@
 {{#list-standard items=model as |item|}}
-  <div class="layout-column layout-align-space-around-start">
-    {{#paper-button}}<h4>{{item.title}}</h4>{{/paper-button}}
-    <div class="tree">
-      {{node-editor node=item.tree parentRecurrenceDepth=0}}
+  <div class="flex-100 layout-column">
+
+    <div class="flex-100 layout-row">
+      {{#paper-button class="no-space-left"}}<h4>{{item.title}}</h4>{{/paper-button}}
+      {{save-button model=item}}
     </div>
+
+    {{tree-editor class="flex-100" tree=item.tree}}
+
   </div>
 {{/list-standard}}

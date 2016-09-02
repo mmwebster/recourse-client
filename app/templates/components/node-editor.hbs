@@ -1,11 +1,48 @@
 {{! list node's properties }}
-<p>Title: {{node.title}} | Num Children: {{node.children.length}} | Recurrence Depth: {{recurrenceDepth}}</p>
+<div class="layout-column node-wrapper">
+  <div class="layout-row layout-align-space-between node {{if nodeIsPivot 'type-pivot' 'type-course'}} {{if nodeIsntRoot 'non-root'}}">
+    {{click-to-edit
+      attr=node.title
+      label="Title"
+    }}
 
-<p class="node-children">
+    {{click-to-edit
+      attr=node.numChildrenRequired
+      label="Num C. Req."
+    }}
+
+    {{click-to-edit
+      attr=node.childrenSelected
+      label="C. Selected"
+    }}
+
+    {{click-to-edit
+      attr=node.numDescendants
+      label="Num Desc."
+      disabled=true
+    }}
+
+    {{click-to-edit
+      attr=node.isDuplicate
+      label="Is Duplicate"
+    }}
+
+    {{click-to-edit
+      attr=node.parentRel
+      label="Parent Rel"
+    }}
+
+    {{click-to-edit
+      attr=node.courseId
+      label="Course ID"
+    }}
+
+  </div>
+
   {{! reccur on node's children if they exist}}
   {{#if nodeHasChildren}}
     {{#each node.children as |child|}}
       {{node-editor node=child parentRecurrenceDepth=recurrenceDepth}}
     {{/each}}
   {{/if}}
-</p>
+</div>
