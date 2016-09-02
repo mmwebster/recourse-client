@@ -1,1 +1,11 @@
-{{yield}}
+{{! list node's properties }}
+<p>Title: {{node.title}} | Num Children: {{node.children.length}} | Recurrence Depth: {{recurrenceDepth}}</p>
+
+<p class="node-children">
+  {{! reccur on node's children if they exist}}
+  {{#if nodeHasChildren}}
+    {{#each node.children as |child|}}
+      {{node-editor node=child parentRecurrenceDepth=recurrenceDepth}}
+    {{/each}}
+  {{/if}}
+</p>
