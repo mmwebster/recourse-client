@@ -19,6 +19,7 @@ export default Model.extend({
   quarters: hasMany('quarter'),
   nodes: hasMany('node'),
   user: belongsTo('user'),
+  tree: attr('raw'),
 
   cid: Ember.computed('subject', 'number', function() {
     return this.get('subject') + this.get('number');

@@ -7,4 +7,5 @@ export default Model.extend({
   school: belongsTo('school'),
   user: belongsTo('user'),
   timelines: hasMany('timeline'),
+  tree: attr('raw'),
 });
