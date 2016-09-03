@@ -74,7 +74,7 @@ export default Ember.Component.extend({
   }),
 
 
-  // Add item if selected
+  // Add , Adds item if selected
   itemAdded: Ember.observer('itemToAdd', function() {
     var item = this.get('itemToAdd');
     if (!isEmpty(item)) {
@@ -109,9 +109,6 @@ export default Ember.Component.extend({
     // Save each object that was modified and bubble up if onSave is defined.
     // Can disable save button for component defined restrictions (e.g. list
     // cannot be empty).
-    addItemToDestinationAction: function(item) {
-      this.addItemToDestination(item);
-    },
     openRemoveItemPrompt: function(item) {
       // set remove prompt title
       let alias = this.get('itemModelAlias');

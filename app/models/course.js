@@ -18,7 +18,7 @@ export default Model.extend({
   concurrent_children: hasMany('course'),
   quarters: hasMany('quarter'),
   nodes: hasMany('node'),
-  user: belongsTo('user'),
+  students: hasMany('student'),
   tree: attr('raw'),
 
   cid: Ember.computed('subject', 'number', function() {
