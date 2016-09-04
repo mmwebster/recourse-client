@@ -8,7 +8,7 @@ export default Model.extend({
   // TODO: Remove this. It was from when I thought that Timeline would own
   // priorCoursework, but it makes more sense to bind that to User.
   // courses: hasMany('courses'),
-  student: belongsTo('student'),
+  student: belongsTo('user'),
   // true if this record is the user's current timeline
   isCurrent: attr('boolean'),
   startingSeason: attr('string'),
