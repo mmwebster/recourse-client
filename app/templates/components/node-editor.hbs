@@ -3,15 +3,23 @@
   <div class="layout-row layout-align-space-between node type-{{node.type}}">
     {{#unless nodeIsntRoot}}
       <h4>Root node</h4>
+
+      {{! root type attrs}}
+      {{click-to-edit
+        attr=node.numChildrenRequired
+        label="Num C. Req."
+      }}
     {{else}}
       {{! type independent attrs}}
-      {{click-to-edit
-        attr=node.title
-        label="Title"
-      }}
 
       {{! pivot type attrs}}
       {{#if nodeIsPivot}}
+
+        {{click-to-edit
+          attr=node.title
+          label="Title"
+        }}
+
         {{click-to-edit
           attr=node.numChildrenRequired
           label="Num C. Req."
@@ -20,14 +28,25 @@
 
       {{! course type attrs}}
       {{#if nodeIsCourse}}
+
+        {{click-to-edit
+          attr=node.subject
+          label="Subject"
+        }}
+
+        {{click-to-edit
+          attr=node.number
+          label="Number"
+        }}
+
         {{click-to-edit
           attr=node.parentRel
           label="Parent Rel"
         }}
 
         {{click-to-edit
-          attr=node.courseId
-          label="Course ID"
+          attr=node.id
+          label="ID"
         }}
       {{/if}}
       {{!click-to-edit

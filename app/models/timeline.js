@@ -17,4 +17,6 @@ export default Model.extend({
   // Indicates to API whether or not the timeline's quarters need to be
   // recomputed.
   sync: attr('boolean'),
+  tree: attr('raw'),
+  treeResolved: attr('boolean'),
 });

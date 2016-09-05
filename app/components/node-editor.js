@@ -23,6 +23,9 @@ export default Ember.Component.extend({
   nodeIsntRoot: Ember.computed('recurrenceDepth', function() {
     return (this.get('recurrenceDepth') > 1);
   }),
+  nodeIsRoot: Ember.computed('node.type', function() {
+    return (this.get('node.type') === 'root');
+  }),
 
   actions: {
     // @desc Create a child node of type 'pivot' or 'course'

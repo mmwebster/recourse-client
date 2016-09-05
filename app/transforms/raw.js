@@ -4,7 +4,12 @@ import Ember from 'ember';
 
 export default DS.Transform.extend({
   deserialize: function(serialized) {
-    return serialized;
+    try {
+      return JSON.parse(serialized)
+    }
+    catch (e) {
+      return serialized;
+    }
   },
   serialize: function(deserialized) {
     let root = deserialized;
@@ -28,17 +33,19 @@ export default DS.Transform.extend({
   ArrayFields: ['childrenSelected'],
 
   recurAndSerialize(node) {
-    // parse all array fields
-    this.get('ArrayFields').forEach((field) => {
-      if (!Ember.isEmpty(node[field])) {
-        Ember.set(node, field, JSON.parse("[" + node[field] + "]"));
-      }
-    });
-    // recur on all children
-    if (!Ember.isEmpty(node.children)) {
-      node.children.forEach((child) => {
-        this.recurAndSerialize(child);
+    if (!Ember.isEmpty(node)) {
+      // parse all array fields
+      this.get('ArrayFields').forEach((field) => {
+        if (!Ember.isEmpty(node[field])) {
+          Ember.set(node, field, JSON.parse("[" + node[field] + "]"));
+        }
       });
+      // recur on all children
+      if (!Ember.isEmpty(node.children)) {
+        node.children.forEach((child) => {
+          this.recurAndSerialize(child);
+        });
+      }
     }
   },
 });

@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   user: Ember.computed.alias('sessionAccount.account'),
   syncDisabled: Ember.computed.not('currentTimeline.sync'),
   syncingInProgress: false,
+  decisionTreeResolved: true,
 
   currentTimeline: Ember.computed('model', function() {
     var timelines = this.get('model');
@@ -59,6 +60,7 @@ export default Ember.Controller.extend({
     debugMe() {
       debugger;
     },
+    resolve
     // TODO: Improve this to only reload the currentTimeline instead of all
     //       timelines in the model.
     sync() {
@@ -72,6 +74,6 @@ export default Ember.Controller.extend({
     },
     syncit() {
       this.toggleProperty('currentTimeline.sync');
-    },
+    }
   },
 });
