@@ -6,7 +6,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   // Node properties:
   //  title, type, children, num_children_required, children_selected,
-  //  num_descendents, is_duplicate, parent_rel, course_id
+  //  num_descendents, is_duplicate, parent_rel, course_id, selected
 
   nodeHasChildren: Ember.computed('node.children.length', function() {
     return (this.get('node.children.length') > 0);
@@ -32,6 +32,16 @@ export default Ember.Component.extend({
     let z = this.get('node.selected');
     // logically... (x * y + ~x * y * z) = y * (x + ~x * z) = y * (x + z)
     return ( y && (x || z) );
+  }),
+
+  nodeIsDisabled: Ember.computed('node.selected', 'parentNumChildrenRequiredFulfilled', function() {
+    // Disable node if it wasn't selected and the parents numChildrenRequired
+    // was already satisfied
+    if (!this.get('node.selected') && this.get('parentNumChildrenRequiredFulfilled')) {
+      return true;
+    } else {
+      return false;
+    }
   }),
 
   numChildrenRequiredFulfilled: false, //Ember.computed('node.selectedChildren.length'),
@@ -66,8 +76,12 @@ export default Ember.Component.extend({
     },
     childUnselected(child) {
       // remove the index of the child-node to this node's selectedChildren
-      var childIndex = this.get('node.children').indexOf(child);
-      this.get('node.selectedChildren').splice(childIndex, 1);
+      // this is the index originally used as the value to push to the array
+      var childOriginalIndex = this.get('node.children').indexOf(child);
+      // this is the index in the array of the value (that represented an index)
+      // that was pushed
+      var childNewIndex = this.get('node.selectedChildren').indexOf(childOriginalIndex);
+      this.get('node.selectedChildren').splice(childNewIndex, 1);
       if (!Ember.isEmpty(this.get('node.selectedChildren')) && this.get('node.numChildrenRequired') <= this.get('node.selectedChildren.length')) {
         this.set('numChildrenRequiredFulfilled', true);
       } else {

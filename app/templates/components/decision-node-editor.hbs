@@ -1,11 +1,11 @@
 {{! list node's properties }}
 <div class="layout-column node-wrapper {{if node.hidden 'hidden'}} {{if nodeIsntRoot 'non-root'}}">
-  <div class="layout-row layout-align-space-between node type-{{node.type}}">
+  <div class="layout-row layout-align-space-between node type-{{node.type}} {{if nodeIsDisabled 'disabled'}}">
     {{! type independent attrs}}
 
     {{#if nodeIsntRoot}}
       <div class="layout-row  layout-align-space-around-center">
-        {{paper-checkbox value=node.selected onChange=(action (mut node.selected))}}
+        {{paper-checkbox disabled=nodeIsDisabled value=node.selected onChange=(action (mut node.selected))}}
       </div>
     {{/if}}
 
@@ -44,6 +44,7 @@
     {{#each node.children as |child|}}
       {{decision-node-editor
         node=child
+        parentNumChildrenRequiredFulfilled=numChildrenRequiredFulfilled
         parentRecurrenceDepth=recurrenceDepth
         onSelect=(action 'childSelected')
         onUnselect=(action 'childUnselected')
