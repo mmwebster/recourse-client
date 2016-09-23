@@ -38,7 +38,12 @@ export default Ember.Component.extend({
 
   selfSelectedObserver: Ember.observer('node.selected', function() {
     if (!Ember.isEmpty(this.get('onSelect'))) {
-      this.get('onSelect')(this.get('node'));
+      // Call the select or unselect parent handler
+      if (this.get('node.selected')) {
+        this.get('onSelect')(this.get('node'));
+      } else {
+        this.get('onUnselect')(this.get('node'));
+      }
     }
   }),
 
@@ -59,17 +64,26 @@ export default Ember.Component.extend({
     //       makes check boxes enabled or not.
     selectSelf() {
     },
+    childUnselected(child) {
+      // remove the index of the child-node to this node's selectedChildren
+      var childIndex = this.get('node.children').indexOf(child);
+      this.get('node.selectedChildren').splice(childIndex, 1);
+      if (!Ember.isEmpty(this.get('node.selectedChildren')) && this.get('node.numChildrenRequired') <= this.get('node.selectedChildren.length')) {
+        this.set('numChildrenRequiredFulfilled', true);
+      } else {
+        this.set('numChildrenRequiredFulfilled', false);
+      }
+    },
     childSelected(child) {
       if (!Ember.isEmpty(child)) {
         // init node's selected children if empty
         if (Ember.isEmpty(this.get('node.selectedChildren'))) {
           this.set('node.selectedChildren', []);
         }
-        // append a new empty node to the children
+        // append the index of the child-node to this node's selectedChildren
         var childIndex = this.get('node.children').indexOf(child);
         this.get('node.selectedChildren').push(childIndex);
         if (!Ember.isEmpty(this.get('node.selectedChildren')) && this.get('node.numChildrenRequired') <= this.get('node.selectedChildren.length')) {
-        // if (this.get('node.numChildrenRequired') <= this.get('node.children.length')) {
           this.set('numChildrenRequiredFulfilled', true);
         } else {
           this.set('numChildrenRequiredFulfilled', false);
