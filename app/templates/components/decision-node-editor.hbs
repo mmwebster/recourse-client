@@ -33,7 +33,9 @@
       label="Is Duplicate"
     }}
 
-    <p class="{{unless numChildrenRequiredFulfilled 'grayed'}}">Choose ({{node.numChildrenRequired}})</p>
+    {{#if nodeHasChildren}}
+      <p class="{{unless numChildrenRequiredFulfilled 'grayed'}}">Choose ({{node.numChildrenRequired}})</p>
+    {{/if}}
 
   </div>
 
