@@ -68,12 +68,18 @@ export default Ember.Controller.extend({
       this.set('syncingInProgress', true);
       // Fetch updated timeline
       this.get('currentTimeline').save().then(() => {
-        // Set back to sync button
         this.set('syncingInProgress', false);
+        // Open the decision tree
+        this.set('decisionTreeWindowEnabled', true);
+        // upon confirming decision tree, the component resaves the timeline
+        // which ends up clearing both sync and tree-resolved flags
       });
     },
     syncit() {
       this.toggleProperty('currentTimeline.sync');
+    },
+    decisionTreeWindowDidClose() {
+      this.set('decisionTreeWindowEnabled', false);
     }
   },
 });

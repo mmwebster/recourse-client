@@ -88,6 +88,6 @@
     </div>
   </div>
 
-  {{decision-tree-window timeline=currentTimeline}}
+  {{decision-tree-window enabled=decisionTreeWindowEnabled onClose=(action 'decisionTreeWindowDidClose') timeline=currentTimeline}}
 
 </div>
