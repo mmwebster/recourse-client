@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
 
   onboardPath: Ember.computed('applicationController.currentPath', function() {
     // get the onboard sub-route name
-    return this.get('applicationController.currentPath').split('.')[2];
+    return this.get('applicationController.currentPath').split('.')[3];
   }),
 
   onboardProgressValue: Ember.computed('onboardPath', function() {
@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
       case 'prior-coursework':
         return 73;
       default:
-        console.log("ERROR: Invalid onboard path `/user/onboard.js`");
+        console.log("ERROR: Invalid onboard path `/user/student/onboard.js`");
     }
   }),
   routeIsSchool: Ember.computed('onboardPath', function() {

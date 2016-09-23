@@ -60,14 +60,14 @@ export default Ember.Controller.extend({
     debugMe() {
       debugger;
     },
-    resolve
+    // resolve
     // TODO: Improve this to only reload the currentTimeline instead of all
     //       timelines in the model.
     sync() {
       // Change sync button to loading
       this.set('syncingInProgress', true);
       // Fetch updated timeline
-      this.get('currentTimeline').save().then((timeline) => {
+      this.get('currentTimeline').save().then(() => {
         // Set back to sync button
         this.set('syncingInProgress', false);
       });

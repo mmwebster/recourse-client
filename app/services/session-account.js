@@ -11,10 +11,11 @@ export default Service.extend({
       if (this.get('session.isAuthenticated')) {
         // is authenticated
         var type = this.get('session.data.authenticated.type');
+        var id;
         switch(type) {
           case 'Student':
             // type is student
-            var id = this.get('session.data.authenticated.id');
+            id = this.get('session.data.authenticated.id');
             if (!isEmpty(id)) {
               return this.get('store').find('student', id).then((user) => {
                 this.set('account', user);
@@ -27,7 +28,7 @@ export default Service.extend({
             break;
           case 'Admin':
             // type is student
-            var id = this.get('session.data.authenticated.id');
+            id = this.get('session.data.authenticated.id');
             if (!isEmpty(id)) {
               return this.get('store').find('admin', id).then((user) => {
                 this.set('account', user);
@@ -40,7 +41,6 @@ export default Service.extend({
             break;
           default:
             throw 'ERROR: invalid user type';
-            break;
         }
       } else {
         resolve();

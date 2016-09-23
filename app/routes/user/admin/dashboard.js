@@ -6,6 +6,6 @@ export default Ember.Route.extend({
   sessionAccount: service(),
 
   model() {
-    return this.get('sessionAccount.account')
+    return this.get('sessionAccount.account');
   }
 });

@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
 
   actions: {
     continueOn: function() {
-      this.transitionToRoute('user.dashboard');
+      this.transitionToRoute('user.student.dashboard');
     }
   }
 });

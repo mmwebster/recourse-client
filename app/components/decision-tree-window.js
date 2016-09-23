@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   showDecisionTreeDialog: Ember.computed.not('timeline.treeResolved'),
 
   actions: {
-    closeDecisionTreeDialog: function(response) {
+    closeDecisionTreeDialog() {
       this.set('timeline.treeResolved', true);
     },
   }

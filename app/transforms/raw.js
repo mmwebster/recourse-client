@@ -5,7 +5,7 @@ import Ember from 'ember';
 export default DS.Transform.extend({
   deserialize: function(serialized) {
     try {
-      return JSON.parse(serialized)
+      return JSON.parse(serialized);
     }
     catch (e) {
       return serialized;

@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
       this.set('continueDisabled', (numDegreeMajors < 1));
     },
     continueOn: function() {
-      this.transitionToRoute('user.onboard.prior-coursework');
+      this.transitionToRoute('user.student.onboard.prior-coursework');
     }
   }
 });

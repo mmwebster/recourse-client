@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
           user.set('school', selectedSchool);
           user.save();
           _this.set('isRequesting', false);
-          _this.transitionToRoute('user.onboard.degree-path');
+          _this.transitionToRoute('user.student.onboard.degree-path');
         });
 
       } else {
