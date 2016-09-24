@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
   }),
 
   // breaks currentTimeline of quarters into years
-  currentYears: Ember.computed('currentTimeline.quarters', function() {
+  currentYears: Ember.computed('currentTimeline.quarters.@each.courses', function() {
     var years = [{ quarters: [] }];
     var yearIndex = 0;
     this.get('currentTimeline.quarters').forEach((quarter, i) => {
@@ -80,6 +80,15 @@ export default Ember.Controller.extend({
     },
     decisionTreeWindowDidClose() {
       this.set('decisionTreeWindowEnabled', false);
+      // reload timeline record
+      // TODO: instead of reloading records, should ideally just get back the
+      //       updated record from the previous request to the API when it maps.
+      //       API would need to set on params send to jsonapi-resources
+      this.get('currentTimeline.quarters').forEach((quarter) => {
+        quarter.get('courses').reload();
+      });
+      // TODO: change this alert to a modal pop-up
+      alert('Your timeline has been mapped!');
     }
   },
 });

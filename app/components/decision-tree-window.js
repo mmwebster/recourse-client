@@ -15,7 +15,6 @@ export default Ember.Component.extend({
         timeline.set('treeResolved', false);
         // inform dashboard that it closed
         this.get('onClose')();
-        alert('Your timeline has been mapped!');
       })
     },
   }
