@@ -87,8 +87,6 @@ export default Ember.Controller.extend({
       this.get('currentTimeline.quarters').forEach((quarter) => {
         quarter.get('courses').reload();
       });
-      // TODO: change this alert to a modal pop-up
-      alert('Your timeline has been mapped!');
     }
   },
 });
