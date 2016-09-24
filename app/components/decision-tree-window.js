@@ -9,7 +9,6 @@ export default Ember.Component.extend({
   actions: {
     closeDecisionTreeDialog() {
       this.set('timeline.treeResolved', true);
-      // debugger;
       this.get('timeline').save().then((timeline) => {
         // clear the sync flag
         timeline.set('sync', false);
