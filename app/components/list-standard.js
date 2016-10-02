@@ -11,7 +11,12 @@ export default Ember.Component.extend({
 
         // Filter search results based on current titleFilter
         return items.filter((item) => {
-          return item.get('title').toLowerCase().indexOf(this.get('titleFilter')) !== -1;
+          // Check if matched
+          var matchedTitle = item.get('title').toLowerCase().indexOf(this.get('titleFilter').toLowerCase()) !== -1;
+          var cid = item.get('subject') + item.get('number');
+          var matchedCid = cid.toLowerCase().indexOf(this.get('titleFilter').toLowerCase()) !== -1;
+          // return result of individual
+          return matchedTitle || matchedCid;
         });
 
       } else {
