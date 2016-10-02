@@ -39,8 +39,18 @@ export default Ember.Component.extend({
     var _this = this;
     if (!isEmpty(items)) {
       if (!isEmpty(searchTerm)) {
-        return items.filter(function(item) {
-          return item.get('title').toLowerCase().indexOf(_this.get('searchTerm')) !== -1;
+        return items.filter((item) => {
+          // Check if matched
+          var matchedTitle = item.get('title').toLowerCase().indexOf(this.get('searchTerm').toLowerCase()) !== -1;
+          var matchedCid, cid;
+          if (this.get('isCourseList')) {
+            cid = item.get('subject') + item.get('number');
+            matchedCid = cid.toLowerCase().indexOf(this.get('searchTerm').toLowerCase()) !== -1;
+          } else {
+            matchedCid = true;
+          }
+          // return result of individual
+          return matchedTitle || matchedCid;
         });
       } else {
         return items;
