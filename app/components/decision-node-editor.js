@@ -57,6 +57,31 @@ export default Ember.Component.extend({
     }
   }),
 
+  // Node Auto-selection
+  // TODO: Make this not require the willRender (as it does bad, deprecated
+  //       stuff)
+  // TODO: Instead of auto-selecting, only show the nodes themselves for what's
+  //       required
+  didInit: false,
+  decisionRequired: true,
+  willRender() {
+    this._super(...arguments);
+
+    if (!this.get('didInit')) {
+      this.set('decisionRequired', (parseInt(this.get('node.numChildrenRequired')) < this.get('node.children.length')));
+      // Auto select the node's if it's a course node and a decision (i.e. must be selected)
+      console.log("Determining if should...");
+
+      if (!this.get('parentDecisionRequired') && !this.get('decisionRequired')) {
+        console.log("Selected node");
+        this.set('node.selected', true);
+      } else {
+        console.log("Didn't select node");
+      }
+      this.set('didInit', true);
+    }
+  },
+
   actions: {
     // @desc Create a child node of type 'pivot' or 'course'
     createChild(type) {
