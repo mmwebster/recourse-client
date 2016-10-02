@@ -33,28 +33,30 @@ export default Ember.Component.extend({
   },
 
   // Get the source items filtered by searchTerm
-  sourceItems: Ember.computed('sourceItemsPromiseObject.content', 'searchTerm', function() {
+  sourceItems: Ember.computed('destinationItems.length', 'sourceItemsPromiseObject.content', 'searchTerm', function() {
     var items = this.get('sourceItemsPromiseObject.content');
     var searchTerm = this.get('searchTerm');
     var _this = this;
     if (!isEmpty(items)) {
-      if (!isEmpty(searchTerm)) {
-        return items.filter((item) => {
+      return items.filter((item) => {
+        console.log("Recomputed..");
+        // only filter by search term if present
+        var matchedTitle = true, matchedCid = true, cid;
+        if (!isEmpty(searchTerm)) {
           // Check if matched
-          var matchedTitle = item.get('title').toLowerCase().indexOf(this.get('searchTerm').toLowerCase()) !== -1;
-          var matchedCid, cid;
+          matchedTitle = item.get('title').toLowerCase().indexOf(this.get('searchTerm').toLowerCase()) !== -1;
           if (this.get('isCourseList')) {
             cid = item.get('subject') + item.get('number');
             matchedCid = cid.toLowerCase().indexOf(this.get('searchTerm').toLowerCase()) !== -1;
           } else {
             matchedCid = true;
           }
-          // return result of individual
-          return matchedTitle || matchedCid;
-        });
-      } else {
-        return items;
-      }
+        }
+        // check if wasn't already added
+        var alreadySelected = (this.get('destinationItems').indexOf(item) !== -1);
+        // return result of individual
+        return (matchedTitle || matchedCid) && !alreadySelected;
+      });
     } else {
       return null;
     }
