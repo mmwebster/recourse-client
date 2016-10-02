@@ -1,12 +1,5 @@
-{{#list-standard items=model as |item|}}
-  <div class="flex-100 layout-column">
+{{#each model as |course|}}
+  <h3>{{course.subject}}{{course.number}}: {{course.title}}</h3>
+{{/each}}
 
-    <div class="flex-100 layout-row">
-      {{#paper-button class="no-space-left"}}<h4><strong>{{item.cid}}</strong>: {{item.title}}</h4>{{/paper-button}}
-      {{save-button model=item}}
-    </div>
-
-    {{tree-editor class="flex-100" tree=item.tree}}
-
-  </div>
-{{/list-standard}}
+{{infinity-loader infinityModel=model}}
