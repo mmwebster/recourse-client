@@ -45,6 +45,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "^2.6.0",
     "ember-export-application-global": "^1.0.5",
+    "ember-infinity": "0.2.6",
     "ember-load-initializers": "^0.5.1",
     "ember-paper": "git+https://github.com/mmwebster/ember-paper.git#c1b6f68da03dce249586c2a6fadb1801e7632dbb",
     "ember-resolver": "^2.0.3",
