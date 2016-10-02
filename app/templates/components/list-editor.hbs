@@ -35,7 +35,10 @@
       {{#each filteredSourceItems as |item|}}
 
         {{#paper-option value=item}}
-          <div class="layout-row layout-align-space-between">
+          <div class="layout-row layout-align-space-between ellipsis-300">
+            {{#if isCourseList}}
+              <strong>{{item.subject}}{{item.number}}</strong>:
+            {{/if}}
             {{item.title}}
           </div>
         {{/paper-option}}
@@ -53,7 +56,12 @@
             <div class="md-list-item-text list-item-text">
               <div class="layout-row layout-align-space-between">
                 <div class="layout-column layout-align-space-around-start">
-                  <h4>{{item.title}}</h4>
+                  <h4 class="ellipsis-230">
+                    {{#if isCourseList}}
+                      <strong>{{item.subject}}{{item.number}}</strong>:
+                    {{/if}}
+                    {{item.title}}
+                  </h4>
                 </div>
                 <div>
                   {{#paper-button warn=true iconButton=true onClick=(action 'openRemoveItemPrompt' item)}}

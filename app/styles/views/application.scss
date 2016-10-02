@@ -25,6 +25,21 @@ a, a * {
   text-transform: capitalize;
 }
 
+.ellipsis-230 {
+  width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.ellipsis-300 {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
 .application-view {
   height: 100%;
 
