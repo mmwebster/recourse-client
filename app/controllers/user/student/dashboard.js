@@ -56,6 +56,10 @@ export default Ember.Controller.extend({
     this.set('currentTimeline.sync', true);
   }),
 
+
+  quarterEditing: null,
+  quarterEditingWindowEnabled: false,
+
   actions: {
     debugMe() {
       debugger;
@@ -87,6 +91,14 @@ export default Ember.Controller.extend({
       this.get('currentTimeline.quarters').forEach((quarter) => {
         quarter.get('courses').reload();
       });
+    },
+    openQuarterSettings(quarter) {
+      this.set('quarterEditing', quarter);
+      this.set('quarterEditingWindowEnabled', true);
+    },
+    quarterEditingWindowDidClose() {
+      this.set('quarterEditingWindowEnabled', false);
+      this.set('currentTimeline.sync', true);
     }
   },
 });

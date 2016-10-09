@@ -1,0 +1,45 @@
+{{#if enabled}}
+  {{#paper-dialog fullscreen=fullscreen onClose=(action "cancel") origin=dialogOrigin}}
+
+    {{#paper-form onSubmit='submit' as |form|}}
+
+      {{#paper-dialog-content}}
+
+        <h2 class="md-title">Edit Quarter: <span class="uppercase">{{quarter.season}}</span> {{quarter.startYear}}</h2>
+
+        <div>
+          {{form.input
+            label="Max Units"
+            type="number"
+            customValidations=validations.maxUnits
+            value=quarter.maxUnits
+            onChange=(action (mut quarter.maxUnits))
+          }}
+        </div>
+
+      {{/paper-dialog-content}}
+
+      {{#paper-dialog-actions class="layout-row"}}
+        <span class="flex"></span>
+
+        {{#paper-button onClick=(action 'cancel')}}Cancel{{/paper-button}}
+
+        {{#paper-button primary=true warn=true disabled=form.isInvalid onClick=(action form.onSubmit)}}
+          <div class="layout-row">
+            <div class="">
+              Save
+            </div>
+            <div class="">
+              {{! Loading spinner}}
+              {{#if isRequesting}}
+                {{paper-progress-circular warn=true class="md-hue-3" diameter="40%"}}
+              {{/if}}
+            </div>
+          </div>
+        {{/paper-button}}
+        <!-- {{!#paper&#45;button primary=true warn=true disabled=form.isInvalid onClick=(action form.onSubmit)}}Save{{!/paper&#45;button}} -->
+      {{/paper-dialog-actions}}
+    {{/paper-form}}
+
+  {{/paper-dialog}}
+{{/if}}

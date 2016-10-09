@@ -8,6 +8,7 @@ export default Model.extend({
   startDate: attr('date'),
   timeline: belongsTo('timeline'),
   courses: hasMany('course'),
+  maxUnits: attr('number'),
 
   // compute the startDate into a start year
   startYear: Ember.computed('startDate', function() {

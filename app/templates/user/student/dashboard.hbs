@@ -54,9 +54,11 @@
         {{!#paper-content class="md-whiteframe-z1 list-demo list-controls-demo year layout-row"}}
           {{#each year.quarters as |quarter|}}
             <div class="quarter layout-column">
-              {{#paper-toolbar class="title uppercase"}}
-                <span>{{quarter.season}} {{quarter.startYear}}</span>
-              {{/paper-toolbar}}
+              <div {{action 'openQuarterSettings' quarter}}>
+                {{#paper-toolbar class="uppercase title" onClick=(action 'openQuarterSettings' quarter)}}
+                  <span>{{quarter.season}} {{quarter.startYear}}</span>
+                {{/paper-toolbar}}
+              </div>
               {{#paper-content class="md-whiteframe-z1 list-demo courses layout-column"}}
                 {{#paper-list}}
                   {{#each quarter.courses as |course|}}
@@ -89,5 +91,6 @@
   </div>
 
   {{decision-tree-window enabled=decisionTreeWindowEnabled onClose=(action 'decisionTreeWindowDidClose') timeline=currentTimeline}}
+  {{quarter-editing-window enabled=quarterEditingWindowEnabled onClose=(action 'quarterEditingWindowDidClose') quarter=quarterEditing}}
 
 </div>
