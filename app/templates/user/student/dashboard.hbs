@@ -39,10 +39,12 @@
           {{! TODO: Better user feedback that syncing is in progress }}
           <strong>{{currentTimeline.title}}</strong>
           {{#paper-button primary=true disabled=syncDisabled iconButton=true onClick=(action 'sync')}}{{paper-icon 'sync'}}{{/paper-button}}
+          {{currentTimelineTotalCourses}} Courses, {{currentTimelineTotalUnits}} Units
         {{else}}
           {{currentTimeline.title}}
           {{! Display sync button}}
           {{#paper-button primary=true disabled=syncDisabled iconButton=true onClick=(action 'sync')}}{{paper-icon 'sync'}}{{/paper-button}}
+          {{currentTimelineTotalCourses}} Courses, {{currentTimelineTotalUnits}} Units
         {{/if}}
         <!-- <button {{!action 'debugMe'}}>Debug Me</button> -->
       </h3>
@@ -64,7 +66,7 @@
                   {{#each quarter.courses as |course|}}
                     {{#paper-item class="md-3-line course"}}
                       <div class="md-list-item-text">
-                        <h4>{{course.subject}} {{course.number}}</h4>
+                        <h4>{{course.subject}} {{course.number}} <span class="grayed">({{course.units}} units)</span></h4>
                         <p>{{course.title}}</p>
                       </div>
                     {{/paper-item}}

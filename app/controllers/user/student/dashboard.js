@@ -11,6 +11,22 @@ export default Ember.Controller.extend({
   syncDisabled: Ember.computed.not('currentTimeline.sync'),
   syncingInProgress: false,
   decisionTreeResolved: true,
+  currentTimelineTotalCourses: 0, // set by totalUnits to reduce num computed props
+  currentTimelineTotalUnits: Ember.computed('currentTimeline.quarters.@each.courses', function() {
+    var totalUnits = 0;
+    var totalCourses = 0;
+
+    this.get('currentTimeline.quarters').forEach((quarter) => {
+      totalCourses += quarter.get('courses.length');
+      quarter.get('courses').forEach((course) => {
+        totalUnits += course.get('units');
+      });
+    });
+
+    this.set('currentTimelineTotalCourses', totalCourses);
+
+    return totalUnits;
+  }),
 
   currentTimeline: Ember.computed('model', function() {
     var timelines = this.get('model');
