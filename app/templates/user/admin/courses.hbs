@@ -1,12 +1,16 @@
 {{#list-standard items=model as |item|}}
   <div class="flex-100 layout-column">
 
-    <div class="flex-100 layout-row">
-      {{#paper-button class="no-space-left"}}<h4><strong>{{item.cid}}</strong>: {{item.title}}</h4>{{/paper-button}}
-      {{save-button model=item}}
-    </div>
+    {{#link-to 'user.admin.course' item.id}}
+    {{!#paper-button}} <!-- onClick=(action 'transitionToCourse' item.id)}} -->
+      <div class="flex-100 layout-row">
+        <h4 class="spacey-h4"><strong>{{item.cid}}</strong>: {{item.title}}</h4>
+        {{save-button model=item}}
+      </div>
+    {{!/paper-button}}
+    {{/link-to}}
 
-    {{tree-editor class="flex-100" tree=item.tree}}
+    {{!tree-editor class="flex-100" tree=item.tree}}
 
   </div>
 {{/list-standard}}

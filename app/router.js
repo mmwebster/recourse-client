@@ -26,6 +26,7 @@ Router.map(function() {
       this.route('courses');
       this.route('degree-majors');
       this.route('degree-minors');
+      this.route('course', { path: 'course/:course_id' });
     });
     this.route('logout');
   });
