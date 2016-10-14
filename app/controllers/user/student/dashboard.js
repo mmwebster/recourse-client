@@ -108,6 +108,13 @@ export default Ember.Controller.extend({
         quarter.get('courses').reload();
       });
     },
+    openCourseSettings(course) {
+      this.set('courseEditing', course);
+      this.set('courseEditingWindowEnabled', true);
+    },
+    courseEditingWindowDidClose() {
+      this.set('courseEditingWindowEnabled', false);
+    },
     openQuarterSettings(quarter) {
       this.set('quarterEditing', quarter);
       this.set('quarterEditingWindowEnabled', true);

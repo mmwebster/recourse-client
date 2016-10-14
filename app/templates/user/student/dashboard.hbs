@@ -64,7 +64,7 @@
               {{#paper-content class="md-whiteframe-z1 list-demo courses layout-column"}}
                 {{#paper-list}}
                   {{#each quarter.courses as |course|}}
-                    {{#paper-item class="md-3-line course"}}
+                    {{#paper-item class="md-3-line course" onClick=(action 'openCourseSettings' course)}}
                       <div class="md-list-item-text">
                         <h4>{{course.subject}} {{course.number}} <span class="grayed">({{course.units}} units)</span></h4>
                         <p>{{course.title}}</p>
@@ -94,5 +94,6 @@
 
   {{decision-tree-window enabled=decisionTreeWindowEnabled onClose=(action 'decisionTreeWindowDidClose') timeline=currentTimeline}}
   {{quarter-editing-window enabled=quarterEditingWindowEnabled onClose=(action 'quarterEditingWindowDidClose') quarter=quarterEditing}}
+  {{course-editing-window enabled=courseEditingWindowEnabled onClose=(action 'courseEditingWindowDidClose') course=courseEditing}}
 
 </div>
