@@ -36,7 +36,7 @@ export default Ember.Component.extend({
   sourceItems: Ember.computed('destinationItems.length', 'sourceItemsPromiseObject.content', 'searchTerm', function() {
     var items = this.get('sourceItemsPromiseObject.content');
     var searchTerm = this.get('searchTerm');
-    var _this = this;
+
     if (!isEmpty(items)) {
       return items.filter((item) => {
         console.log("Recomputed..");

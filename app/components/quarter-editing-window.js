@@ -18,10 +18,10 @@ export default Ember.Component.extend({
   actions: {
     submit() {
       this.set('isRequesting', true);
-      this.get('quarter').save().then((quarter) => {
+      this.get('quarter').save().then(() => {
         this.set('isRequesting', false);
         this.get('onClose')();
-      })
+      });
     },
     cancel() {
       this.get('onClose')();
