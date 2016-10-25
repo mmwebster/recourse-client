@@ -1,1 +1,3 @@
-{{decision-node-editor class="decision-tree" node=tree.children.firstObject parentRecurrenceDepth=0 parentDecisionRequired=false}}
+{{#each tree.children as |topLevelReqTree|}}
+  {{decision-node-editor class="decision-tree" node=topLevelReqTree parentRecurrenceDepth=0 parentDecisionRequired=false}}
+{{/each}}
