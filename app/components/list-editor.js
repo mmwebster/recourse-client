@@ -52,10 +52,19 @@ export default Ember.Component.extend({
             matchedCid = true;
           }
         }
+
         // check if wasn't already added
         var alreadySelected = (this.get('destinationItems').indexOf(item) !== -1);
+
+        // check conditions for other custom args
+        var passesCustomGuards = true;
+        // reject item if this list is filtered by the isStatic property and course isn't static
+        if (this.get('isStaticCourseFilter') && !item.get('isStatic')) {
+          passesCustomGuards = false;
+        }
+
         // return result of individual
-        return (matchedTitle || matchedCid) && !alreadySelected;
+        return (matchedTitle || matchedCid) && !alreadySelected && passesCustomGuards;
       });
     } else {
       return null;
@@ -84,7 +93,6 @@ export default Ember.Component.extend({
       })
     });
   }),
-
 
   // Add , Adds item if selected
   itemAdded: Ember.observer('itemToAdd', function() {

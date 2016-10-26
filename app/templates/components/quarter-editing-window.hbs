@@ -15,6 +15,10 @@
             value=quarter.maxUnits
             onChange=(action (mut quarter.maxUnits))
           }}
+
+          {{! Static course additions }}
+          {{list-editor sourceModel='school' sourceId=sessionAccount.account.school.id destinationModel='quarter' destinationId=quarter.id itemsModel='courses' itemModelAlias='course' isCourseList=true isStaticCourseFilter=true}}
+
         </div>
 
       {{/paper-dialog-content}}

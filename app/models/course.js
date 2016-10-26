@@ -20,6 +20,7 @@ export default Model.extend({
   nodes: hasMany('node'),
   students: hasMany('student'),
   tree: attr('raw'),
+  isStatic: attr('boolean'),
 
   cid: Ember.computed('subject', 'number', function() {
     return this.get('subject') + this.get('number');

@@ -52,26 +52,52 @@
     {{#paper-content}}
       {{#paper-list}}
         {{#each destinationItems as |item|}}
-          {{#paper-item class="md-3-line list-item"}}
-            <div class="md-list-item-text list-item-text">
-              <div class="layout-row layout-align-space-between">
-                <div class="layout-column layout-align-space-around-start">
-                  <h4 class="ellipsis-230">
-                    {{#if isCourseList}}
-                      <strong>{{item.subject}}{{item.number}}</strong>:
-                    {{/if}}
-                    {{item.title}}
-                  </h4>
+          {{! TODO: Remove this ugliness after adding a static_courses relationship to Quarter }}
+          {{#if isStaticCourseFilter}}
+            {{#if item.isStatic}}
+              {{#paper-item class="md-3-line list-item static-course"}}
+                <div class="md-list-item-text list-item-text">
+                  <div class="layout-row layout-align-space-between">
+                    <div class="layout-column layout-align-space-around-start">
+                      <h4 class="ellipsis-230">
+                        {{#if isCourseList}}
+                          <strong>{{item.subject}}{{item.number}}</strong>:
+                        {{/if}}
+                        {{item.title}}
+                      </h4>
+                    </div>
+                    <div>
+                      {{#paper-button warn=true iconButton=true onClick=(action 'openRemoveItemPrompt' item)}}
+                        {{paper-icon "remove circle"}}
+                      {{/paper-button}}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  {{#paper-button warn=true iconButton=true onClick=(action 'openRemoveItemPrompt' item)}}
-                    {{paper-icon "remove circle"}}
-                  {{/paper-button}}
+              {{/paper-item}}
+              {{paper-divider}}
+            {{/if}}
+          {{else}}
+            {{#paper-item class="md-3-line list-item nonstatic-course"}}
+              <div class="md-list-item-text list-item-text">
+                <div class="layout-row layout-align-space-between">
+                  <div class="layout-column layout-align-space-around-start">
+                    <h4 class="ellipsis-230">
+                      {{#if isCourseList}}
+                        <strong>{{item.subject}}{{item.number}}</strong>:
+                      {{/if}}
+                      {{item.title}}
+                    </h4>
+                  </div>
+                  <div>
+                    {{#paper-button warn=true iconButton=true onClick=(action 'openRemoveItemPrompt' item)}}
+                      {{paper-icon "remove circle"}}
+                    {{/paper-button}}
+                  </div>
                 </div>
               </div>
-            </div>
-          {{/paper-item}}
-          {{paper-divider}}
+            {{/paper-item}}
+            {{paper-divider}}
+          {{/if}}
         {{/each}}
       {{/paper-list}}
     {{/paper-content}}

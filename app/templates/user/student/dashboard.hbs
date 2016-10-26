@@ -64,12 +64,23 @@
               {{#paper-content class="md-whiteframe-z1 list-demo courses layout-column"}}
                 {{#paper-list}}
                   {{#each quarter.courses as |course|}}
-                    {{#paper-item class="md-3-line course" onClick=(action 'openCourseSettings' course)}}
-                      <div class="md-list-item-text">
-                        <h4>{{course.subject}} {{course.number}} <span class="grayed">({{course.units}} units)</span></h4>
-                        <p>{{course.title}}</p>
-                      </div>
-                    {{/paper-item}}
+                    {{#if course.isStatic}}
+                      {{! TODO: figure out how to simply insert the is-static classname into }}
+                      {{!       the paper-item component element instead of repeating the template markup }}
+                      {{#paper-item class="md-3-line course is-static" onClick=(action 'openCourseSettings' course)}}
+                        <div class="md-list-item-text">
+                          <h4>{{course.subject}} {{course.number}} <span class="grayed">({{course.units}} units)</span></h4>
+                          <p>{{course.title}}</p>
+                        </div>
+                      {{/paper-item}}
+                    {{else}}
+                      {{#paper-item class="md-3-line course" onClick=(action 'openCourseSettings' course)}}
+                        <div class="md-list-item-text">
+                          <h4>{{course.subject}} {{course.number}} <span class="grayed">({{course.units}} units)</span></h4>
+                          <p>{{course.title}}</p>
+                        </div>
+                      {{/paper-item}}
+                    {{/if}}
                     {{paper-divider}}
                   {{else}}
                     {{#paper-item class="md-3-line course"}}
