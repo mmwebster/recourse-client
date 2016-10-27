@@ -5,6 +5,13 @@ const { service } = Ember.inject;
 export default Ember.Component.extend({
   sessionAccount: service('session-account'),
   isRequesting: false,
+  totalUnits: Ember.computed('quarter.courses', function() {
+    var totalUnits = 0;
+    this.get('quarter.courses').forEach((course) => {
+      totalUnits += course.get('units');
+    });
+    return totalUnits;
+  }),
 
   validations: {
     maxUnits: [{

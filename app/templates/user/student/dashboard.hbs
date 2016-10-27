@@ -58,7 +58,7 @@
             <div class="quarter layout-column">
               <div {{action 'openQuarterSettings' quarter}}>
                 {{#paper-toolbar class="uppercase title" onClick=(action 'openQuarterSettings' quarter)}}
-                  <span>{{quarter.season}} {{quarter.startYear}}</span>
+                  <span>{{quarter.season}} {{quarter.startYear}} <strong class="total-units">+{{quarter.totalUnits}}</strong></span>
                 {{/paper-toolbar}}
               </div>
               {{#paper-content class="md-whiteframe-z1 list-demo courses layout-column"}}
