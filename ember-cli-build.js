@@ -6,7 +6,7 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     // Add options here
     fingerprint: {
-      prepend: 'https://s3-us-west-1.amazonaws.com/reqourse-assets/reqourse-client/',
+      prepend: process.env.ASSETS_URL,
     },
     autoprefixer: {
       browsers: ['last 3 versions']
