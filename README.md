@@ -1,4 +1,13 @@
-# Reqourse-client
+# Summary
+This is the client for a web app that automatically produces a 4-year plan for college students based on course lists, majors, minors, and elective options. I developed it over the summer after having prototyped the algorithms with a team of classmates during the 2016 UCSC Hackathon. We were inspired by the endless hassle of maintaining a courseplan amid changing course offerings and major/minor/elective decisions. Such a service should be offered to all students, augmenting the efforts of academic advisors.
+
+I abandoned this project after discovering some relatively similar products/startups in production, as well as the legal hurdles in selling such a service to schools. I decided that open-sourcing and providing a free product was the only option I wanted to consider. But, at that point I wanted to focus on my coursework.
+
+Please contact me if you're interested in continuing this project–the prototype works!
+
+![prototype screenshot](prototype-screenshot.png?raw=true "Recourse Prototype Screenshot")
+
+# Ember Auto-Gen Docs
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here. Add something here.
